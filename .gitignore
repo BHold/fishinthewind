@@ -3,3 +3,4 @@
 *.orig
 db/
 fish_env/
+wind/blog_wind/migrations/
