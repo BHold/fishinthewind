@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block main %}
+    {% for post in posts %}
+        <article class="article">
+            {{ post.body|linebreaks }}
+        </article>
+    {% endfor %}
+{% endblock %}
