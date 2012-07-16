@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} by Brian Holdefehr{% endblock %}
+
+{% block main %}
+
+    <article class="article">
+        <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
+        <h2><a href="{% url post post.slug %}">{{ post.title }}</a></h2>
+        {{ post.body|linebreaks }}
+    </article>
+
+{% endblock %}

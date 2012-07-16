@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Fish in the Wind by Brian Holdefehr{% endblock %}</title>
 
     {% comment %}
     <link rel="shortcut icon" href="{{ STATIC_URL }}images/gigsmash_favicon.ico">
@@ -17,6 +17,8 @@
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}images/apple_touch/apple-touch-icon-precomposed.png">
     {% endcomment %}
+    <script type="text/javascript" src="http://use.typekit.com/drj6uxj.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
@@ -24,12 +26,26 @@
 
 <body>
 
-    <header id="header">
-        <p>Hi</p>
-    </header>
+    <div id="container" class="clearfix">
+        <header id="header">
+            <div id="pic"></div>
+            <h2><a href="{% url home %}">Fish in the Wind</a></h2>
 
-    <div id="main" role="main">
-        {% block main %}{% endblock %}
+            <nav id="nav">
+                <p><a href="{% url writing %}">Writing</a></p>
+                <p><a href="{% url galleries %}">Photos</a></p>
+                <p><a href="{% url about %}">About</a></p>
+            </nav>
+
+            <div id="links">
+                <p id="twitter"><a href="https://twitter.com/BrianHoldefehr"><span id="twitter-icon"></span>@BrianHoldefehr</a></p>
+                <p id="rss"><a href="{% url feed %}"><span id="rss-icon"></span>RSS Feed</a></p>
+            </div>
+        </header>
+
+        <div id="main" role="main">
+            {% block main %}{% endblock %}
+        </div>
     </div>
 
     {% comment %}
