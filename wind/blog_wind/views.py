@@ -27,8 +27,6 @@ def home(request, page=1):
     })
     return render_to_response('home.html', variables)
 
-
-
 def post(request, slug):
     """
     Displays an individual post
@@ -41,15 +39,15 @@ def post(request, slug):
     })
     return render_to_response('post.html', variables)
 
-def essays(request):
+def writing(request):
     """
     A page that will list all of the posts that are essays only
     """ 
 
-    essays = Post.objects.get_active().filter(is_gallery=False)
+    writings = Post.objects.get_active().filter(is_gallery=False)
 
     variables = RequestContext(request, {
-        'essays': essays
+        'writings': writings 
     })
     return render_to_response('essays.html', variables)
 

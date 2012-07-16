@@ -3,7 +3,22 @@
 {% block main %}
     {% for post in posts %}
         <article class="article">
+            <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
             {{ post.body|linebreaks }}
         </article>
     {% endfor %}
+
+    {% if posts.has_other_pages %}
+        <div id="pagination">
+        {% if posts.has_previous %}
+            <a id="newer" href="{% url paged_home posts.previous_page_number %}">Newer Posts</a>
+        {% endif %}
+
+        {% if posts.has_next %}
+            <a id="older" href="{% url paged_home posts.next_page_number %}">Older Posts</a>
+        {% endif %}
+        </div>
+    {% endif %}
+
 {% endblock %}

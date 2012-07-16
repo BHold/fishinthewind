@@ -11,9 +11,12 @@
 
 body {
     height: 100%;
-    font-family: Helvetica;
-    font-size: 15px;
-    line-height: 23px;
+    width: 100%;
+    font-family: "proxima-nova";
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 30px;
+    color: #444;
 }
 
 /* End General */
@@ -21,28 +24,192 @@ body {
 /* Header */
 
 #header {
-    position: absolute;
+    position: fixed;
     width: 260px;
-    min-height: 100%;
+    text-align: center;
     border-right: 1px solid #ddd;
+    min-height: 100%;
 }
+
+#pic {
+    position: relative;
+    top: 47px;
+    left: 47px;
+    width: 166px;
+    height: 166px;
+    background: #bbb;
+    margin-bottom: 70px;
+    border-radius: 6px;
+}
+
+#header h2 {
+    margin-bottom: 40px;
+    font-family: "bello-pro";
+    font-weight: 400;
+}
+
+#header h2 a {
+    color: #000;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+#nav a {
+    text-decoration: none;
+    color: #555;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+#nav a:hover, #nav a:focus {
+    color: #333;
+}
+
+#links {
+    margin-top: 40px;
+}
+
+#links p {
+    position: relative;
+    left: 12px;
+}
+
+#links a {
+    text-decoration: none;
+    color: #888;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+#links a:hover, #links a:focus {
+    color: #666;
+}
+
+#rss-icon {
+    position: absolute;
+    top: 6px;
+    left: 66px;
+    background: url('../images/twitter-rss-sprite.png') 0 0 no-repeat;
+    height: 17px;
+    width: 17px;
+    -webkit-background-size: 38px 42px; 
+    -moz-background-size: 38px 42px; 
+    -o-background-size: 38px 42px; 
+    background-size: 38px 42px; 
+}
+
+#twitter-icon {
+    position: absolute;
+    top: 4px;
+    left: 32px;
+    background: url('../images/twitter-rss-sprite.png') -18px 0 no-repeat;
+    height: 21px;
+    width: 21px;
+    -webkit-background-size: 38px 42px; 
+    -moz-background-size: 38px 42px; 
+    -o-background-size: 38px 42px; 
+    background-size: 38px 42px; 
+}
+
+#rss:hover #rss-icon, #rss:focus #rss-icon {
+    background: url('../images/twitter-rss-sprite.png') 0 -18px no-repeat;
+    -webkit-background-size: 38px 43px; 
+    -moz-background-size: 38px 43px; 
+    -o-background-size: 38px 43px; 
+    background-size: 38px 43px; 
+}
+
+#twitter:hover #twitter-icon, #twitter:focus #twitter-icon {
+    background: url('../images/twitter-rss-sprite.png') -18px -22px no-repeat;
+    -webkit-background-size: 38px 43px; 
+    -moz-background-size: 38px 43px; 
+    -o-background-size: 38px 43px; 
+    background-size: 38px 43px; 
+}
+
 
 /* End Header */
 
 /* Main */
 
 #main {
-    position: relative;
-    width: 740px;
-    left: 260px;
+    margin-left: 260px;
 }
 
 .article {
-    padding: 40px;
+    padding: 30px 50px;
+    border-bottom: 1px solid #ddd;
 }
 
 .article p {
-    margin: 20px 0;
+    margin: 22px 0;
+    width: 640px;
+}
+
+.article h2 {
+    margin: 45px 0 30px 0;
+}
+
+.article h2 a {
+    font-family: "ff-nuvo-web-pro";
+    color: #000;
+    font-size: 38px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.article .date {
+    color: #999;
+    margin: 5px 0;
+    font-weight: 700;
+}
+
+#pagination {
+    height: 113px;
+}
+
+#older, #newer {
+    padding: 10px 15px;
+    position: absolute;
+    margin: 30px;
+    text-decoration: none;
+    border-radius: 7px;
+    border: 3px solid #bbb;
+    color: #888;
+    font-weight: 700;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#eee));
+    background-image: -webkit-linear-gradient(top, #fbfbfb, #eee);
+    background-image: -moz-linear-gradient(top, #fbfbfb, #eee);
+    background-image: -ms-linear-gradient(top, #fbfbfb, #eee);
+    background-image: -o-linear-gradient(top, #fbfbfb, #eee);
+}
+
+#older {
+    right: 20px;
+}
+
+#newer {
+    left: 280px;
+}
+
+#older:hover, #newer:hover, #older:focus, #newer:focus {
+    border: 3px solid #aaa;
+    color: #777;
+}
+
+#older:active, #newer:active {
+    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+    background: #eee;
+    padding: 11px 14px 9px 16px;
 }
 
 /* End Main */
+
+/* Get rid of TypeKit badge */
+
+.typekit-badge {
+    display: none !important;
+}
+/* End Typekit */
