@@ -14,8 +14,8 @@ body {
     width: 100%;
     font-family: "proxima-nova";
     font-weight: 400;
-    font-size: 19px;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 31px;
     color: #444;
 }
 
@@ -148,13 +148,13 @@ body {
 }
 
 .article h2 {
-    margin: 45px 0 30px 0;
+    margin: 50px 0 35px 0;
 }
 
 .article h2 a {
     font-family: "ff-nuvo-web-pro";
     color: #000;
-    font-size: 38px;
+    font-size: 40px;
     font-weight: 800;
     text-decoration: none;
 }
@@ -203,6 +203,33 @@ body {
     box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
     background: #eee;
     padding: 11px 14px 9px 16px;
+}
+
+#month-list {
+    padding: 50px;
+    list-style: none;
+}
+
+.writing-list {
+    padding: 12px 20px;
+    list-style: none;
+}
+
+.month {
+    font-family: "ff-nuvo-web-pro";
+    font-weight: 800;
+    color: #999;
+}
+
+.writing-title a {
+    font-family: "proxima-nova";
+    font-weight: 700;
+    text-decoration: none;
+    color: #444;
+}
+
+.writing-title a:hover, .writing-title a:focus {
+    color: #222;
 }
 
 /* End Main */

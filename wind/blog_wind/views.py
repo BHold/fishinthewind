@@ -12,7 +12,7 @@ def home(request, page=1):
     if they are essays or galleries
     """
 
-    all_posts = Post.objects.get_active()
+    all_posts = Post.objects.get_posted()
 
     paginator = Paginator(all_posts, 7)
 
@@ -44,19 +44,19 @@ def writing(request):
     A page that will list all of the posts that are essays only
     """ 
 
-    writings = Post.objects.get_active().filter(is_gallery=False)
+    writings = Post.objects.get_posted().filter(is_gallery=False)
 
     variables = RequestContext(request, {
         'writings': writings 
     })
-    return render_to_response('essays.html', variables)
+    return render_to_response('writing.html', variables)
 
 def galleries(request):
     """
     A page that will list all of the posts that are galleries only
     """
 
-    galleries = Post.objects.get_active().filter(is_gallery=True)
+    galleries = Post.objects.get_posted().filter(is_gallery=True)
 
     variables = RequestContext(request, {
         'galleries': galleries 

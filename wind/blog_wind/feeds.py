@@ -14,4 +14,4 @@ class RecentFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.body[:150] + "..."
+        return item.body
