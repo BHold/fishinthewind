@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
 
@@ -19,4 +20,8 @@ urlpatterns = patterns('',
     url(r'^post/(?P<slug>[-\w]+)$', 'blog_wind.views.post', name='post'),
     # RSS
     url(r'^feeds/recent$', RecentFeed(), name='feed'),
+    #Media
+    (r'media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    #Static Media
+    (r'static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}), 
 )

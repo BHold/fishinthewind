@@ -4,3 +4,4 @@
 db/
 fish_env/
 wind/blog_wind/migrations/
+wind/blog_wind/media/

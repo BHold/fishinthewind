@@ -1,6 +1,7 @@
 from django.contrib import admin
+from sorl.thumbnail.admin import AdminImageMixin
 
-from blog_wind.models import Post
+from blog_wind.models import Post, Photo, Gallery, GalleryUpload
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
@@ -15,10 +16,10 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('title',),
         }),
         ('Publication', {
-            'fields': ('active', 'publish_at', 'is_gallery'),
+            'fields': ('active', 'publish_at'),
         }),
         ('Contents', {
-            'fields': ('body',),
+            'fields': ('body', 'gallery'),
         }),
         ('Optional', {
             'fields': ('slug',),
@@ -27,3 +28,29 @@ class PostAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Post, PostAdmin)
+
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('active', 'title', 'created')
+    list_display_links = ('title',)
+    list_editable = ('active',)
+    list_filter = ('created', 'modified', 'active')
+    date_hierarchy = 'created'
+    search_fields = ['title']
+
+admin.site.register(Gallery, GalleryAdmin)
+
+class GalleryUploadAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(GalleryUpload, GalleryUploadAdmin)
+
+class PhotoAdmin(AdminImageMixin, admin.ModelAdmin):
+    list_display = ('active', 'title', 'image')
+    list_display_links = ('title',)
+    list_editable = ('active',)
+    list_filter = ('created', 'modified', 'active')
+    date_hierarchy = 'created'
+    search_fields = ['title']
+
+admin.site.register(Photo, PhotoAdmin)
+

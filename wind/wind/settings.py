@@ -1,5 +1,6 @@
 # Django settings for wind project.
 import os
+import datetime
 
 PROJECT_ROOT = os.path.dirname(__file__)
 
@@ -44,19 +45,22 @@ USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+USE_L10N = False 
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'nrbwrtiyzf7wxzc#t2cp!1b6%b$=%_!in#32!&amp;j$$p3(7@ip@_'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '%s/media/' % PROJECT_ROOT
+MEDIA_ROOT = '%s/../blog_wind/media/' % PROJECT_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -83,6 +87,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'nrbwrtiyzf7wxzc#t2cp!1b6%b$=%_!in#32!&amp;j$$p3(7@ip@_'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -122,6 +129,7 @@ INSTALLED_APPS = (
 
     'south',
     'storages',
+    'sorl.thumbnail',
 
     'blog_wind'
 )
@@ -154,6 +162,24 @@ LOGGING = {
         },
     }
 }
+
+AWS_ACCESS_KEY_ID = 'AKIAIL6DJPWZAVLJAAHQ' 
+AWS_SECRET_ACCESS_KEY = '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' 
+AWS_STORAGE_BUCKET_NAME = 'fishinthewind' 
+AWS_IS_GZIPPED = True
+AWS_AUTO_CREATE_BUCKET = True
+
+future = datetime.datetime.now() + datetime.timedelta(days=364)
+AWS_HEADERS = {
+    'Expires': future.strftime('%a, %d %b %Y %H:%M:%S GMT'),
+    'Cache-Control': 'max-age=31536000, public'
+}
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+#AWS_S3_CUSTOM_DOMAIN = 'd3d2r2ijcbse8a.cloudfront.net' #sets domain for compressed files
+
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 try:
     from local_settings import *

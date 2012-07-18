@@ -44,7 +44,7 @@ def writing(request):
     A page that will list all of the posts that are essays only
     """ 
 
-    writings = Post.objects.get_posted().filter(is_gallery=False)
+    writings = Post.objects.get_posted().filter(gallery__isnull=True)
 
     variables = RequestContext(request, {
         'writings': writings 
@@ -56,7 +56,7 @@ def galleries(request):
     A page that will list all of the posts that are galleries only
     """
 
-    galleries = Post.objects.get_posted().filter(is_gallery=True)
+    galleries = Post.objects.get_posted().filter(gallery__isnull=False)
 
     variables = RequestContext(request, {
         'galleries': galleries 
