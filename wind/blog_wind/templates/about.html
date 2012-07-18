@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% load thumbnail %}
+    {% thumbnail "http://127.0.0.1:8000/static/images/brian.jpg" "250x270" crop="center"  as im %}
+        <img id="brian" alt="Brian at North Cascades NP" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></img>
+    {% endthumbnail %}
+    <article id="about-brian">
+    </article>
+{% endblock %}

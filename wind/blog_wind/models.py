@@ -48,9 +48,14 @@ class CommonInfo(models.Model):
 
 class Photo(CommonInfo):
     image = ImageField(upload_to="galleries/photos/%Y/%m/%d")
+    height = models.PositiveIntegerField(blank=True, null=True)
+    width = models.PositiveIntegerField(blank=True, null=True)
 
     def __unicode__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['title']
 
     def delete(self, *args, **kwargs):
         """
@@ -125,7 +130,7 @@ class GalleryUpload(models.Model):
             else:
                 gallery = Gallery.objects.create(title=self.title)
             count = 1
-            for filename in zf.namelist():
+            for filename in sorted(zf.namelist()):
                 if filename.startswith('__'): # don't process meta files
                     continue
                 data = zf.read(filename)
@@ -150,11 +155,13 @@ class GalleryUpload(models.Model):
                     except Exception: # PIL doesn't recognize file as an image, so we skip it
                         continue
 
-                    title = self.title + ' ' + str(count)
+                    title = self.title + ' ' + str(count).zfill(2)
                     try:
                         photo = Photo.objects.get(title=title)
                     except Photo.DoesNotExist:
                         photo = Photo.objects.create(title=title)
+                        photo.width = trial_image.size[0]
+                        photo.height = trial_image.size[1]
                         photo.image.save(filename, ContentFile(data))
                         gallery.photos.add(photo)
                     count += 1
