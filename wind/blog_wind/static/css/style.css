@@ -14,8 +14,8 @@ body {
     width: 100%;
     font-family: "proxima-nova";
     font-weight: 400;
-    font-size: 20px;
-    line-height: 31px;
+    font-size: 19px;
+    line-height: 29px;
     color: #444;
 }
 
@@ -138,13 +138,13 @@ body {
 }
 
 .article {
-    padding: 30px 50px;
+    padding: 30px 0 30px 50px;
     border-bottom: 1px solid #ddd;
 }
 
 .article p {
     margin: 22px 0;
-    width: 640px;
+    width: 690px;
 }
 
 .article h2 {
@@ -154,7 +154,7 @@ body {
 .article h2 a {
     font-family: "ff-nuvo-web-pro";
     color: #000;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 800;
     text-decoration: none;
 }
@@ -163,6 +163,15 @@ body {
     color: #999;
     margin: 5px 0;
     font-weight: 700;
+}
+
+.gallery {
+    padding-top: 10px;
+    width: 690px;
+}
+
+.gallery-img {
+    border: 1px solid #666;
 }
 
 #pagination {
