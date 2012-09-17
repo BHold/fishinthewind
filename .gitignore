@@ -1,8 +1,10 @@
 *.pyc
 *.swp
 *.orig
+*.DS_Store
+.Python
 db/
-fish_env/
+fish_venv/
 wind/blog_wind/migrations/
 wind/blog_wind/media/
 wind/wind/local_settings.py
