@@ -1,4 +1,7 @@
+import mimetypes
+
 from storages.backends.s3boto import S3BotoStorage  
+from boto.s3.key import Key
  
 class StaticToS3Storage(S3BotoStorage): 
     """ 
