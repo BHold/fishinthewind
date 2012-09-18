@@ -139,10 +139,6 @@ LOGGING = {
     }
 }
 
-#AWS_S3_CUSTOM_DOMAIN = 'd3d2r2ijcbse8a.cloudfront.net' #sets domain for compressed files
-
-#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
 try:
     from local_settings import *
 except ImportError:
