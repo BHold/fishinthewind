@@ -93,7 +93,7 @@ body {
     position: absolute;
     top: 6px;
     left: 66px;
-    background: url('../images/twitter-rss-sprite.png') 0 0 no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') 0 0 no-repeat;
     height: 17px;
     width: 17px;
     -webkit-background-size: 38px 42px; 
@@ -106,7 +106,7 @@ body {
     position: absolute;
     top: 4px;
     left: 32px;
-    background: url('../images/twitter-rss-sprite.png') -18px 0 no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') -18px 0 no-repeat;
     height: 21px;
     width: 21px;
     -webkit-background-size: 38px 42px; 
@@ -116,7 +116,7 @@ body {
 }
 
 #rss:hover #rss-icon, #rss:focus #rss-icon {
-    background: url('../images/twitter-rss-sprite.png') 0 -18px no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') 0 -18px no-repeat;
     -webkit-background-size: 38px 43px; 
     -moz-background-size: 38px 43px; 
     -o-background-size: 38px 43px; 
@@ -124,7 +124,7 @@ body {
 }
 
 #twitter:hover #twitter-icon, #twitter:focus #twitter-icon {
-    background: url('../images/twitter-rss-sprite.png') -18px -22px no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') -18px -22px no-repeat;
     -webkit-background-size: 38px 43px; 
     -moz-background-size: 38px 43px; 
     -o-background-size: 38px 43px; 
