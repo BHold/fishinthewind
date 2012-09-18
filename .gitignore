@@ -8,3 +8,4 @@ fish_venv/
 wind/blog_wind/migrations/
 wind/blog_wind/media/
 wind/wind/local_settings.py
+wind/wind/live_settings.py

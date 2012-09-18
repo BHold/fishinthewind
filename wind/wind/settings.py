@@ -1,28 +1,10 @@
 # Django settings for wind project.
 import os
-import datetime
 
 PROJECT_ROOT = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False 
 TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': '', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '', # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -49,9 +31,6 @@ USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'nrbwrtiyzf7wxzc#t2cp!1b6%b$=%_!in#32!&amp;j$$p3(7@ip@_'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -87,9 +66,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'nrbwrtiyzf7wxzc#t2cp!1b6%b$=%_!in#32!&amp;j$$p3(7@ip@_'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -162,20 +138,6 @@ LOGGING = {
         },
     }
 }
-
-AWS_ACCESS_KEY_ID = 'AKIAIL6DJPWZAVLJAAHQ' 
-AWS_SECRET_ACCESS_KEY = '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' 
-AWS_STORAGE_BUCKET_NAME = 'fishinthewind' 
-AWS_IS_GZIPPED = True
-AWS_AUTO_CREATE_BUCKET = True
-
-future = datetime.datetime.now() + datetime.timedelta(days=364)
-AWS_HEADERS = {
-    'Expires': future.strftime('%a, %d %b %Y %H:%M:%S GMT'),
-    'Cache-Control': 'max-age=31536000, public'
-}
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 #AWS_S3_CUSTOM_DOMAIN = 'd3d2r2ijcbse8a.cloudfront.net' #sets domain for compressed files
 
