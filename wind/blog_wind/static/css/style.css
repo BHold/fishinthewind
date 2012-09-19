@@ -45,6 +45,15 @@ body {
     border-radius: 6px;
 }
 
+#coming-soon {
+    font-size: 24pt;
+    font-weight: bold;
+    line-height: 1.3em;
+    position: relative;
+    top: 20px;
+    color: #888;
+}
+
 #header h2 {
     margin-bottom: 40px;
     font-family: "bello-pro";
@@ -276,6 +285,16 @@ body {
     -o-border-radius: 7px;
     border-radius: 7px;
     float: left;
+}
+
+#about-brian {
+    margin-top: 55px;
+    float: left;
+    width: 420px;
+}
+
+#about-brian p {
+    margin-bottom: 22px;
 }
 
 /* End Main */
