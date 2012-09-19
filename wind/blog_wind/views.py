@@ -41,7 +41,7 @@ def post(request, slug):
 
 def writing(request):
     """
-    A page that will list all of the posts that are essays only
+    A page that will list all of the posts that are writing only
     """ 
 
     writings = Post.objects.get_posted().filter(gallery__isnull=True)

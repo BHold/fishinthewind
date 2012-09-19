@@ -31,9 +31,7 @@ class CommonManager(models.Manager):
 
 class CommonInfo(models.Model):
     """
-    Abstract model for Post, Gallery, and Photo that provides 
-    'title', 'created', 'modified', and 'active' fields.
-    Also sets manager to CommonManager.
+    Abstract model for Post, Gallery, and Photo that provides basic common fields 
     """
     title = models.CharField(max_length=120,
                              help_text="Can be up to 120 characters.")
@@ -142,9 +140,7 @@ class GalleryUpload(models.Model):
                 if len(data):
                     img_file = StringIO(data)
                     try:
-                        # the following is from django.forms.fields.ImageField:
-                        # load() is the only method that can spot a truncated JPEG,
-                        #  but it cannot be called sanely after verify()
+                        # load() can spot a truncated JPEG
                         trial_image = Image.open(img_file)
                         trial_image.load()
 
@@ -153,8 +149,8 @@ class GalleryUpload(models.Model):
                         if hasattr(img_file, 'reset'):
                             img_file.reset()
 
-                        # verify() is the only method that can spot a corrupt PNG,
-                        #  but it must be called immediately after the constructor
+                        # verify() can spot a corrupt PNG
+                        # but it must be called immediately after the constructor
                         trial_image = Image.open(img_file)
                         trial_image.verify()
                     except Exception: # PIL doesn't recognize file as an image, so we skip it
