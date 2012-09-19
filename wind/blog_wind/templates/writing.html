@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Brian's Writing{% endblock %}
+
 {% block main %}
 
     {% regroup writings by publish_at|date:"F, Y" as writings_by_month %}

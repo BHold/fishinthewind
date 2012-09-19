@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}About Brian{% endblock %}
+
 {% block main %}
 {% load thumbnail %}
     {% thumbnail "http://d3ry2ziyu0wa1k.cloudfront.net/images/brian.jpg" "220x230" crop="center"  as im %}
@@ -7,6 +9,6 @@
     {% endthumbnail %}
     <article id="about-brian">
         <p>I'm a web developer and co-founder at <a href="https://www.gigsmash.com">Gigsmash</a>.</p>
-        <p>Some questions I find interesting: What makes something funny? Why are the acts that we call inhumane only ever performed by humans?</p>
+        <p>Some questions I like: What makes something funny? Why are the acts that we call inhumane only ever performed by humans?</p>
     </article>
 {% endblock %}

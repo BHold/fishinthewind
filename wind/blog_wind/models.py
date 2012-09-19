@@ -90,7 +90,7 @@ class Gallery(CommonInfo):
 
 class Post(CommonInfo):
     slug = models.SlugField(unique=True)
-    body = models.TextField(help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line")
+    body = models.TextField(blank=True, help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line")
     publish_at = models.DateTimeField(default=datetime.datetime.now(),
                                       help_text="Date and time post should become active.")
     gallery = models.ForeignKey(Gallery, related_name="post", blank=True, null=True)
@@ -108,6 +108,11 @@ class Post(CommonInfo):
         ordering = ['-publish_at', '-modified', '-created']
 
 class GalleryUpload(models.Model):
+    """
+    Used to easily create Galleries in admin section
+
+    Provided a .zip file of photos it creates a gallery
+    """
     zip_file = models.FileField(upload_to='temp', storage=fs, help_text="Select a .zip file of images to upload")
     gallery = models.ForeignKey(Gallery, null=True, blank=True,
                             help_text="Select a gallery to add these images to. Leave blank to create new gallery.")
