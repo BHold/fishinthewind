@@ -105,7 +105,6 @@ INSTALLED_APPS = (
     'south',
     'storages',
     'sorl.thumbnail',
-    'compressor',
 
     'blog_wind'
 )

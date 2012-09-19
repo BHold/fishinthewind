@@ -10,7 +10,6 @@ class StaticToS3Storage(S3BotoStorage):
     ./manage.py collectstatic uses this class to send static files to s3 
 
     Needed to override save() in order to set rewind to True in set_contents_from_file call
-    Also django-compressor requires files to be saved locally as well as on S3
     """ 
     def __init__(self, *args, **kwargs): 
         super(StaticToS3Storage, self).__init__(*args, **kwargs) 
@@ -34,5 +33,4 @@ class StaticToS3Storage(S3BotoStorage):
         k.set_metadata('Content-Type',content_type)
         k.set_contents_from_file(content, headers=headers, policy=self.acl,
                                  reduced_redundancy=self.reduced_redundancy, rewind=True)
-        self.local_storage._save(cleaned_name, content)
         return cleaned_name
