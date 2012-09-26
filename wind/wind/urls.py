@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^photos$', 'blog_wind.views.galleries', name='galleries'),
     url(r'^about$', direct_to_template, {'template': 'about.html'}, name='about'), 
     url(r'^post/(?P<slug>[-\w]+)$', 'blog_wind.views.post', name='post'),
+    # Resume
+    url(r'^resume$', direct_to_template, {'template': 'resume.html'}, name='resume'), 
     # RSS
     url(r'^feeds/recent$', RecentFeed(), name='feed'),
     #Media
