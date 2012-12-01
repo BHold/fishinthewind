@@ -7,42 +7,45 @@ from django.db import models
 from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from PIL import Image
-from storages.backends.s3boto import S3BotoStorage
 from boto.s3.connection import S3Connection, SubdomainCallingFormat
-from boto.s3.key import Key
 from boto.exception import S3ResponseError
 from sorl.thumbnail import ImageField
 from django.conf import settings
 
-# Used to store gallery .zipfiles locally, instead of at MEDIA_ROOT since there is no need to send them to S3
+# Used to store gallery .zipfiles locally, instead of at MEDIA_ROOT since there
+# is no need to send them to S3
 fs = FileSystemStorage(location='%s/../blog_wind/' % settings.PROJECT_ROOT)
+
 
 class CommonManager(models.Manager):
     """
     Manager for Posts, Galleries, and Photos
 
-    Provides functions to filter for objects that are active and/or should be currently posted
+    Provides functions to filter for objects that are active
+    and/or should be currently posted
     """
-    def get_active(self):
+    def get_active(self): 
         return self.get_query_set().filter(active=True)
-    
+
     def get_posted(self):
         return self.get_query_set().filter(publish_at__lte=datetime.datetime.now(), active=True)
 
+
 class CommonInfo(models.Model):
     """
-    Abstract model for Post, Gallery, and Photo that provides basic common fields 
+    Abstract model for Post, Gallery, and Photo that provides common fields
     """
     title = models.CharField(max_length=120,
                              help_text="Can be up to 120 characters.")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True,
-                                 help_text="Controls whether or not object is live to the world")
+                    help_text="Controls whether or not object is live to world")
     objects = CommonManager()
 
     class Meta:
         abstract = True
+
 
 class Photo(CommonInfo):
     image = ImageField(upload_to="galleries/photos/%Y/%m/%d")
@@ -51,7 +54,7 @@ class Photo(CommonInfo):
 
     def __unicode__(self):
         return self.title
-    
+
     class Meta:
         ordering = ['title']
 
@@ -67,24 +70,26 @@ class Photo(CommonInfo):
             try:
                 bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
                 bucket.delete_key(self.image.name)
-            except S3ResponseError, e: # bucket doesn't exist for some reason
+            except S3ResponseError:  # bucket doesn't exist for some reason
                 pass
         super(Photo, self).delete(*args, **kwargs)
 
+
 class Gallery(CommonInfo):
     photos = models.ManyToManyField(Photo, related_name='galleries', null=True, blank=True)
-    
+
     def __unicode__(self):
         return self.title
-    
+
     def delete(self, *args, **kwargs):
         """
-        Deletes the photos that are only associated with this gallery 
+        Deletes the photos that are only associated with this gallery
         """
         for photo in self.photos.all():
             if photo.galleries.count() == 1:
                 photo.delete()
         super(Gallery, self).delete(*args, **kwargs)
+
 
 class Post(CommonInfo):
     slug = models.SlugField(unique=True)
@@ -104,6 +109,7 @@ class Post(CommonInfo):
 
     class Meta:
         ordering = ['-publish_at', '-modified', '-created']
+
 
 class GalleryUpload(models.Model):
     """
@@ -134,7 +140,7 @@ class GalleryUpload(models.Model):
                 gallery = Gallery.objects.create(title=self.title)
             count = 1
             for filename in sorted(zf.namelist()):
-                if filename.startswith('__'): # don't process meta files
+                if filename.startswith('__'):  # don't process meta files
                     continue
                 data = zf.read(filename)
                 if len(data):
@@ -174,6 +180,3 @@ class GalleryUpload(models.Model):
         """
         os.remove(self.zip_file.path)
         super(GalleryUpload, self).delete(*args, **kwargs)
-
-
-
