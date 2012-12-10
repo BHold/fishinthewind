@@ -10,3 +10,4 @@ wind/blog_wind/media/
 wind/wind/local_settings.py
 wind/wind/live_settings.py
 wind/wind/static/
+wind/fabfile.py
