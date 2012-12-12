@@ -20,33 +20,32 @@
     <script type="text/javascript" src="http://use.typekit.com/drj6uxj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style3.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style4.css">
 
 </head>
 
 <body>
 
-    <div id="container" class="clearfix">
-        <header id="header">
-            <div id="pic"><span id="coming-soon">Pretend There Is An Icon</span></div>
-            <h2><a href="{% url home %}">Fish in the Wind</a></h2>
+    <header id="header" class="clearfix">
+        <div class="container">
+            <a id="header_title" href="{% url home %}">Brian Holdefehr</a>
 
             <nav id="nav">
-                <p><a href="{% url writing %}">Writing</a></p>
-                <p><a href="{% url galleries %}">Photos</a></p>
-                <p><a href="{% url about %}">About</a></p>
-                <p><a href="mailto:brian@gigsmash.com">Contact</a></p>
+                <a class="nav_link" href="{% url about %}">About</a>
+                <a class="nav_link" href="{% url writing %}">Writing</a>
+                <a class="nav_link" href="{% url galleries %}">Photos</a>
+                <a class="nav_link" href="mailto:brian@gigsmash.com">Contact</a>
             </nav>
 
-            <div id="links">
-                <p id="twitter"><a href="https://twitter.com/BrianHoldefehr"><span id="twitter-icon"></span>@BrianHoldefehr</a></p>
-                <p id="rss"><a href="{% url feed %}"><span id="rss-icon"></span>RSS Feed</a></p>
-            </div>
-        </header>
-
-        <div id="main" role="main">
-            {% block main %}{% endblock %}
+            <ul id="social">
+                <li><a href="https://twitter.com/BrianHoldefehr"><span id="twitter-icon"></span></a></li>
+                <li><a href="{% url feed %}"><span id="rss-icon"></span></a></li>
+            </ul>
         </div>
+    </header>
+
+    <div id="main" role="main" class="container">
+        {% block main %}{% endblock %}
     </div>
 
     <script type="text/javascript">

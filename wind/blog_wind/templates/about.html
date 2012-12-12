@@ -5,11 +5,12 @@
 {% block main %}
 {% load thumbnail %}
     <article id="about-brian">
-        {% thumbnail "http://d3ry2ziyu0wa1k.cloudfront.net/images/brian.jpg" "253x274" crop="center"  as im %}
-            <img id="brian" alt="Brian at North Cascades NP" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></img>
+        {% thumbnail "http://d3ry2ziyu0wa1k.cloudfront.net/images/brian.jpg" "253x300" crop="center"  as im %}
+            <img id="brian-picture" alt="Brian at North Cascades NP" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></img>
         {% endthumbnail %}
-        <p>I'm a web developer and co-founder at <a href="https://www.gigsmash.com">Gigsmash</a>.</p>
-        <p>Some stuff I like: travel, nature, climbing, reading, hiking, thinking, art</p> 
-        <p>Some questions I like: What makes something funny? Why are the acts that we call inhumane only ever performed by humans? Why do people refer to the parts of their lives they dislike as 'the real world'? Why do I like these questions?</p>
+        <p>I'm a web developer and co-founder at <a class="article-link" href="https://www.gigsmash.com">Gigsmash</a>.</p>
+        <p>I mostly use Python and JavaScript, and love working with both (though I'm always playing with new stuff).</p>
+        <p>We haven't been able to gain much traction with Gigsmash, so I'm currently looking to join a new team in the New York area. You can find my resume <a class="article-link" href="{% url resume %}">here</a>.</p>
+        <p>Some non-programming stuff I like: travel, nature, climbing, reading, hiking, photography, art.</p>
     </article>
 {% endblock %}

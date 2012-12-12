@@ -6,14 +6,14 @@
 
 {% load thumbnail %}
 
-    <article class="article">
+    <article class="article article--individual">
         <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
-        <h2><a href="{% url post post.slug %}">{{ post.title }}</a></h2>
-        {{ post.body|linebreaks }}
+        <h2 class="article-title"><a class="article-title_link" href="{% url post post.slug %}">{{ post.title }}</a></h2>
+        <div class={% if post.body %}post-body-spacing{% endif %}>{{ post.body|linebreaks }}</div>
         {% if post.gallery %}
             <div class="gallery">
             {% for photo in post.gallery.photos.all %}
-                {% thumbnail photo.image "690" as im %}
+                {% thumbnail photo.image "750" as im %}
                 <img class="gallery-img" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
                 {% endthumbnail %}
             {% endfor %}

@@ -24,7 +24,7 @@ class CommonManager(models.Manager):
     Provides functions to filter for objects that are active
     and/or should be currently posted
     """
-    def get_active(self): 
+    def get_active(self):
         return self.get_query_set().filter(active=True)
 
     def get_posted(self):
@@ -93,7 +93,7 @@ class Gallery(CommonInfo):
 
 class Post(CommonInfo):
     slug = models.SlugField(unique=True)
-    body = models.TextField(blank=True, help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line")
+    body = models.TextField(blank=True, help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line. Links should have class 'article-link'")
     publish_at = models.DateTimeField(default=datetime.datetime.now(),
                                       help_text="Date and time post should become active.")
     gallery = models.ForeignKey(Gallery, related_name="post", blank=True, null=True)

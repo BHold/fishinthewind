@@ -19,172 +19,167 @@ body {
     color: #444;
 }
 
+.container {
+    width: 750px;
+    margin: 0 auto;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+}
+
 /* End General */
 
 /* Header */
 
 #header {
-    position: fixed;
-    width: 260px;
-    text-align: center;
-    border-right: 1px solid #ddd;
-    min-height: 100%;
+    background: #444;
+    padding: 7px 0;
 }
 
-#pic {
-    position: relative;
-    top: 47px;
-    left: 47px;
-    width: 166px;
-    height: 166px;
-    background: #bbb;
-    margin-bottom: 70px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -o-border-radius: 6px;
-    border-radius: 6px;
-}
-
-#coming-soon {
-    font-size: 24pt;
-    font-weight: bold;
-    line-height: 1.3em;
-    position: relative;
-    top: 20px;
-    color: #888;
-}
-
-#header h2 {
-    margin-bottom: 40px;
+#header_title {
+    color: #bbb;
+    font-size: 24px;
+    float: left;
     font-family: "bello-pro";
-    font-weight: 400;
-}
-
-#header h2 a {
-    color: #000;
-    font-size: 28px;
-    text-decoration: none;
-}
-
-#nav a {
-    text-decoration: none;
-    color: #555;
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 32px;
-}
-
-#nav a:hover, #nav a:focus {
-    color: #333;
-}
-
-#links {
-    margin-top: 40px;
-}
-
-#links p {
     position: relative;
-    left: 12px;
+    top: 2px;
 }
 
-#links a {
-    text-decoration: none;
-    color: #888;
-    font-weight: 700;
-    line-height: 32px;
+#header_title:hover, #header_title:focus {
+    color: #999;
 }
 
-#links a:hover, #links a:focus {
-    color: #666;
+#nav {
+    float: right;
+}
+
+.nav_link {
+    color: #bbb;
+    font-size: 18px;
+    margin-left: 6px;
+    font-weight: 600;
+}
+
+.nav_link:hover, .nav_link:focus {
+    color: #999;
+}
+
+#social {
+    list-style: none;
+    position: relative;
+    float: left;
 }
 
 #rss-icon {
     position: absolute;
     top: 6px;
     left: 66px;
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') 0 0 no-repeat;
+    background: url('../images/twitter-rss-sprite.png') 0 0 no-repeat;
     height: 17px;
     width: 17px;
-    -webkit-background-size: 38px 42px; 
-    -moz-background-size: 38px 42px; 
-    -o-background-size: 38px 42px; 
-    background-size: 38px 42px; 
+    -webkit-background-size: 38px 42px;
+    -moz-background-size: 38px 42px;
+    -o-background-size: 38px 42px;
+    background-size: 38px 42px;
 }
 
 #twitter-icon {
     position: absolute;
     top: 4px;
     left: 32px;
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') -18px 0 no-repeat;
+    background: url('../images/twitter-rss-sprite.png') -18px 0 no-repeat;
     height: 21px;
     width: 21px;
-    -webkit-background-size: 38px 42px; 
-    -moz-background-size: 38px 42px; 
-    -o-background-size: 38px 42px; 
-    background-size: 38px 42px; 
+    -webkit-background-size: 38px 42px;
+    -moz-background-size: 38px 42px;
+    -o-background-size: 38px 42px;
+    background-size: 38px 42px;
 }
 
-#rss:hover #rss-icon, #rss:focus #rss-icon {
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') 0 -18px no-repeat;
-    -webkit-background-size: 38px 43px; 
-    -moz-background-size: 38px 43px; 
-    -o-background-size: 38px 43px; 
-    background-size: 38px 43px; 
+#rss-icon:hover, #rss-icon:focus {
+    background: url('../images/twitter-rss-sprite.png') 0 -18px no-repeat;
+    -webkit-background-size: 38px 43px;
+    -moz-background-size: 38px 43px;
+    -o-background-size: 38px 43px;
+    background-size: 38px 43px;
 }
 
-#twitter:hover #twitter-icon, #twitter:focus #twitter-icon {
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-sprite.png') -18px -22px no-repeat;
-    -webkit-background-size: 38px 43px; 
-    -moz-background-size: 38px 43px; 
-    -o-background-size: 38px 43px; 
-    background-size: 38px 43px; 
+#twitter-icon:hover, #twitter-icon:focus {
+    background: url('../images/twitter-rss-sprite.png') -18px -22px no-repeat;
+    -webkit-background-size: 38px 43px;
+    -moz-background-size: 38px 43px;
+    -o-background-size: 38px 43px;
+    background-size: 38px 43px;
 }
 
 
 /* End Header */
 
-/* Main */
-
-#main {
-    margin-left: 260px;
-}
+/* Home and Posts */
 
 .article {
-    padding: 30px 0 30px 50px;
+    padding: 30px 0;
     border-bottom: 1px solid #ddd;
 }
 
-.article p {
-    margin: 22px 0;
-    width: 690px;
+.article--individual {
+    border-bottom: none;
 }
 
-.article h2 {
+.article p {
+    margin: 24px 0;
+}
+
+.article-title {
     margin: 50px 0 35px 0;
 }
 
-.article h2 a {
+.article-title_link {
     font-family: "ff-nuvo-web-pro";
-    color: #000;
+    color: #333;
     font-size: 36px;
-    font-weight: 800;
-    text-decoration: none;
+    font-weight: 700;
 }
 
-.article .date {
+.article-title_link:hover, .article-title_link:focus {
+    color: #111;
+}
+
+.article-link {
+    color: #66f;
+    font-weight: 600;
+}
+
+.article-link:hover, .article-link:focus {
+    color: #44f;
+}
+
+.article-link:visited {
+    color: #c17ded;
+}
+
+.date {
     color: #999;
-    margin: 5px 0;
     font-weight: 700;
+}
+
+.post-body-spacing {
+    margin-bottom: 35px;
 }
 
 .gallery {
     padding-top: 10px;
-    width: 690px;
 }
 
 .gallery-img, .gallery-preview-img {
     border: 1px solid #666;
 }
+
+/* End Home and Posts */
+
+/* Pagination */
 
 #pagination {
     height: 113px;
@@ -194,7 +189,6 @@ body {
     padding: 10px 15px;
     position: absolute;
     margin: 30px;
-    text-decoration: none;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     -o-border-radius: 7px;
@@ -211,16 +205,16 @@ body {
 }
 
 #older {
-    right: 20px;
+    right: 0;
 }
 
 #newer {
-    left: 280px;
+    left: 0;
 }
 
 #older:hover, #newer:hover, #older:focus, #newer:focus {
     border: 3px solid #aaa;
-    color: #777;
+    color: #666;
 }
 
 #older:active, #newer:active {
@@ -229,8 +223,12 @@ body {
     padding: 11px 14px 9px 16px;
 }
 
+/* End Pagination */
+
+/* Archives */
+
 #month-list {
-    padding: 50px;
+    padding: 50px 0;
     list-style: none;
 }
 
@@ -241,19 +239,18 @@ body {
 
 .month {
     font-family: "ff-nuvo-web-pro";
-    font-weight: 800;
+    font-weight: 700;
     color: #999;
 }
 
-.writing-title a, .gallery-title a {
+.writing-title_link, .gallery-title_link {
     font-family: "proxima-nova";
     font-weight: 700;
-    text-decoration: none;
-    color: #444;
+    color: #555;
 }
 
-.writing-title a:hover, .writing-title a:focus, .gallery-title a:focus, .gallery-title a:hover {
-    color: #222;
+.writing-title_link:hover, .writing-title_link:focus, .gallery-title_link:focus, .gallery-title_link:hover {
+    color: #333;
 }
 
 .gallery-list {
@@ -263,22 +260,36 @@ body {
 
 .gallery-preview {
     padding-top: 15px;
-    width: 320px;
+    width: 350px;
     text-align: center;
     float: left;
+}
+
+.gallery-preview--odd {
     margin-right: 50px;
 }
 
+.gallery-preview:hover .gallery-title_link {
+    color: #111;
+}
 .gallery-title {
     padding-bottom: 7px;
 }
 
-.gallery-preview:hover .gallery-title a {
-    color: #111;
+/* End Archives */
+
+/* About */
+
+#about-brian {
+    margin-top: 50px;
 }
 
-#brian {
-    margin: 0 50px 30px 0;
+#about-brian p {
+    margin: 22px 0;
+}
+
+#brian-picture {
+    margin: 0 50px 50px 0;
     border: 1px solid #666;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -287,22 +298,13 @@ body {
     float: left;
 }
 
-#about-brian {
-    width: 740px;
-    margin: 50px 0 50px 50px;
-}
-
-#about-brian p {
-    margin-bottom: 22px;
-}
-
-/* End Main */
+/* End About */
 
 /* Resume */
 
 #resume {
-    padding: 30px 0 30px 50px;
-    width: 740px;
+    padding: 30px 0;
+    width: 750px;
     line-height: 28px;
 }
 
@@ -316,11 +318,11 @@ body {
     margin-bottom: 35px;
 }
 
-#resume-header p {
+.address-phone {
     margin: 8px 0;
 }
 
-#resume-header h2 {
+.resume-name {
     color: #333;
     font-size: 61px;
     font-family: "ff-enzo-web";
@@ -356,8 +358,8 @@ body {
 /* Clearfix to contain floats */
 
 .clearfix:before, .clearfix:after {
-    content: ""; 
-    display: table; 
+    content: "";
+    display: table;
 }
 
 .clearfix:after {

@@ -5,7 +5,7 @@
 {% block main %}
 {% load thumbnail %}
 {% load gallery_tags %}
-    
+
     {% regroup galleries by publish_at|date:"F, Y" as galleries_by_month %}
 
     <ol id="month-list">
@@ -13,10 +13,10 @@
             <li class="month">{{ month.grouper }}
             <ol class="gallery-list clearfix">
                 {% for gallery_post in month.list %}
-                    <li class="gallery-preview">
-                        <p class="gallery-title"><a href="{{ gallery_post.get_absolute_url }}">{{ gallery_post.title }}</a></p>
+                    <li class="gallery-preview{% if not forloop.counter|divisibleby:2 %} gallery-preview--odd{% endif %}">
+                        <p class="gallery-title"><a class="gallery-title_link" href="{{ gallery_post.get_absolute_url }}">{{ gallery_post.title }}</a></p>
                         {% with photo=gallery_post.gallery.photos.all|random_image %}
-                            {% thumbnail photo.image "320x213" as im %}
+                            {% thumbnail photo.image "350x233" as im %}
                             <a href="{{ gallery_post.get_absolute_url }}"><img class="gallery-preview-img" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img></a>
                             {% endthumbnail %}
                         {% endwith %}
