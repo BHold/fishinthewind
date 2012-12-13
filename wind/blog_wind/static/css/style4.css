@@ -12,21 +12,24 @@
 body {
     height: 100%;
     width: 100%;
-    font-family: "proxima-nova";
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 29px;
+    font-family: "museo-sans";
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 30px;
     color: #444;
 }
 
 .container {
     width: 750px;
     margin: 0 auto;
-    position: relative;
 }
 
 a {
     text-decoration: none;
+}
+
+#main {
+    margin-top: 35px;
 }
 
 /* End General */
@@ -34,11 +37,15 @@ a {
 /* Header */
 
 #header {
-    background: #444;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #333;
     padding: 7px 0;
+    opacity: 0.93;
 }
 
-#header_title {
+#header-title {
     color: #bbb;
     font-size: 24px;
     float: left;
@@ -47,7 +54,7 @@ a {
     top: 2px;
 }
 
-#header_title:hover, #header_title:focus {
+#header-title:hover, #header-title:focus {
     color: #999;
 }
 
@@ -59,6 +66,7 @@ a {
     color: #bbb;
     font-size: 18px;
     margin-left: 6px;
+    font-family: "proxima-nova";
     font-weight: 600;
 }
 
@@ -74,44 +82,65 @@ a {
 
 #rss-icon {
     position: absolute;
-    top: 6px;
-    left: 66px;
-    background: url('../images/twitter-rss-sprite.png') 0 0 no-repeat;
+    top: 8px;
+    left: 96px;
     height: 17px;
     width: 17px;
-    -webkit-background-size: 38px 42px;
-    -moz-background-size: 38px 42px;
-    -o-background-size: 38px 42px;
-    background-size: 38px 42px;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') 0 0 no-repeat;
+    -webkit-background-size: 63px 48px;
+    -moz-background-size: 63px 48px;
+    -o-background-size: 63px 48px;
+    background-size: 63px 48px;
+}
+
+#github-icon {
+    position: absolute;
+    top: 4px;
+    left: 62px;
+    height: 24px;
+    width: 24px;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -40px 0 no-repeat;
+    -webkit-background-size: 63px 48px;
+    -moz-background-size: 63px 48px;
+    -o-background-size: 63px 48px;
+    background-size: 63px 48px;
 }
 
 #twitter-icon {
     position: absolute;
-    top: 4px;
+    top: 6px;
     left: 32px;
-    background: url('../images/twitter-rss-sprite.png') -18px 0 no-repeat;
     height: 21px;
     width: 21px;
-    -webkit-background-size: 38px 42px;
-    -moz-background-size: 38px 42px;
-    -o-background-size: 38px 42px;
-    background-size: 38px 42px;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -18px 0 no-repeat;
+    -webkit-background-size: 63px 48px;
+    -moz-background-size: 63px 48px;
+    -o-background-size: 63px 48px;
+    background-size: 63px 48px;
 }
 
 #rss-icon:hover, #rss-icon:focus {
-    background: url('../images/twitter-rss-sprite.png') 0 -18px no-repeat;
-    -webkit-background-size: 38px 43px;
-    -moz-background-size: 38px 43px;
-    -o-background-size: 38px 43px;
-    background-size: 38px 43px;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') 0 -18px no-repeat;
+    -webkit-background-size: 63px 49px;
+    -moz-background-size: 63px 49px;
+    -o-background-size: 63px 49px;
+    background-size: 63px 49px;
 }
 
 #twitter-icon:hover, #twitter-icon:focus {
-    background: url('../images/twitter-rss-sprite.png') -18px -22px no-repeat;
-    -webkit-background-size: 38px 43px;
-    -moz-background-size: 38px 43px;
-    -o-background-size: 38px 43px;
-    background-size: 38px 43px;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -18px -22px no-repeat;
+    -webkit-background-size: 63px 49px;
+    -moz-background-size: 63px 49px;
+    -o-background-size: 63px 49px;
+    background-size: 63px 49px;
+}
+
+#github-icon:hover, #github-icon:focus {
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -40px -25px no-repeat;
+    -webkit-background-size: 63px 49px;
+    -moz-background-size: 63px 49px;
+    -o-background-size: 63px 49px;
+    background-size: 63px 49px;
 }
 
 
@@ -120,7 +149,7 @@ a {
 /* Home and Posts */
 
 .article {
-    padding: 30px 0;
+    padding: 25px 0 30px 0;
     border-bottom: 1px solid #ddd;
 }
 
@@ -129,7 +158,7 @@ a {
 }
 
 .article p {
-    margin: 24px 0;
+    margin: 30px 0;
 }
 
 .article-title {
@@ -149,7 +178,7 @@ a {
 
 .article-link {
     color: #66f;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .article-link:hover, .article-link:focus {
@@ -162,6 +191,7 @@ a {
 
 .date {
     color: #999;
+    font-family: "ff-nuvo-web-pro";
     font-weight: 700;
 }
 
@@ -175,6 +205,9 @@ a {
 
 .gallery-img, .gallery-preview-img {
     border: 1px solid #666;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 /* End Home and Posts */
@@ -187,8 +220,9 @@ a {
 
 #older, #newer {
     padding: 10px 15px;
-    position: absolute;
-    margin: 30px;
+    position: relative;
+    top: 31px;
+    left: 30px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     -o-border-radius: 7px;
@@ -202,14 +236,12 @@ a {
     background-image: -moz-linear-gradient(top, #fbfbfb, #eee);
     background-image: -ms-linear-gradient(top, #fbfbfb, #eee);
     background-image: -o-linear-gradient(top, #fbfbfb, #eee);
+    float: left;
 }
 
 #older {
-    right: 0;
-}
-
-#newer {
-    left: 0;
+    float: right;
+    left: -30px;
 }
 
 #older:hover, #newer:hover, #older:focus, #newer:focus {
@@ -244,7 +276,7 @@ a {
 }
 
 .writing-title_link, .gallery-title_link {
-    font-family: "proxima-nova";
+    font-family: "museo-sans";
     font-weight: 700;
     color: #555;
 }
@@ -281,11 +313,12 @@ a {
 /* About */
 
 #about-brian {
-    margin-top: 50px;
+    padding-top: 50px;
+    font-size: 18px;
 }
 
 #about-brian p {
-    margin: 22px 0;
+    margin-bottom: 22px;
 }
 
 #brian-picture {
@@ -303,8 +336,7 @@ a {
 /* Resume */
 
 #resume {
-    padding: 30px 0;
-    width: 750px;
+    padding: 40px 0;
     line-height: 28px;
 }
 
@@ -319,15 +351,17 @@ a {
 }
 
 .address-phone {
-    margin: 8px 0;
+    font-size: 21px;
+    position: relative;
+    top: -6px;
 }
 
 .resume-name {
     color: #333;
-    font-size: 61px;
+    font-size: 62px;
     font-family: "ff-enzo-web";
     font-weight: 900;
-    line-height: 1em;
+    line-height: .95em;
 }
 
 #res-email {

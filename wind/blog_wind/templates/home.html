@@ -3,7 +3,7 @@
 {% block main %}
 {% load thumbnail %}
     {% for post in posts %}
-        <article class="article">
+        <article class="article{% if post.gallery %} has-gallery{% endif %}">
             <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
             <h2 class="article-title"><a class="article-title_link" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
             <div class={% if post.body %}post-body-spacing{% endif %}>{{ post.body|linebreaks }}</div>
@@ -11,7 +11,7 @@
                 <div class="gallery">
                 {% for photo in post.gallery.photos.all %}
                     {% thumbnail photo.image "750" as im %}
-                    <img class="gallery-img" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
+                    <img class="gallery-img{% if im.height > im.width %} vertical{% endif %}" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
                     {% endthumbnail %}
                 {% endfor %}
                 </div>

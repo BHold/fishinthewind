@@ -1,0 +1,113 @@
+/* General */
+#main {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* End General */
+
+/* Header */
+
+#header {
+    text-align: center;
+    position: inherit;
+    height: inherit;
+    width: inherit;
+}
+
+#header-title {
+    float: none;
+    display: block;
+}
+
+#nav {
+    float: none;
+}
+
+#social {
+    display: none;
+}
+
+/* End Header */
+
+/* Home and Posts */
+.article {
+    padding: 0;
+}
+
+.article-title {
+    margin: 30px 0 25px 0;
+}
+
+.gallery {
+    text-align: center;
+}
+
+.gallery-img {
+    width: 240px;
+    height: 160px;
+}
+
+.vertical {
+    height: 360px;
+}
+
+.has-gallery {
+    display: none;
+}
+
+/* End Home and Posts */
+
+/* Pagination */
+
+#pagination {
+    display: none;
+}
+
+/* End Pagination */
+
+/* Archives */
+
+#month-list {
+    padding: 20px 0;
+}
+
+.gallery-preview {
+    width: 100%;
+}
+
+.gallery-preview-img {
+    width: 240px;
+    height: 160px;
+}
+
+/* End Archives */
+
+/* Resume */
+
+#resume-header {
+    text-align: center;
+}
+
+.resume-name {
+    font-size: 40px;
+}
+
+#resume ul {
+    width: 100%;
+}
+
+/* End Resume */
+
+/* About */
+
+#brian-picture {
+    display: none;
+}
+
+/* End About */

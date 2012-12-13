@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.title }} by Brian Holdefehr{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block main %}
 
@@ -14,7 +14,7 @@
             <div class="gallery">
             {% for photo in post.gallery.photos.all %}
                 {% thumbnail photo.image "750" as im %}
-                <img class="gallery-img" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
+                <img class="gallery-img{% if im.height > im.width %} vertical{% endif %}" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
                 {% endthumbnail %}
             {% endfor %}
             </div>
