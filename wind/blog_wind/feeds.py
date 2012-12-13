@@ -2,10 +2,11 @@ from django.contrib.syndication.views import Feed
 
 from blog_wind.models import Post
 
+
 class RecentFeed(Feed):
-    title = "Fish in the Wind by Brian Holdefehr"
+    title = "Brian Holdefehr's Blog"
     link = "/feeds/recent"
-    description = "Recent posts on Fish in the Wind by Brian Holdefehr"
+    description = "Recent posts by Brian Holdefehr"
 
     def items(self):
         return Post.objects.get_active()[:10]
