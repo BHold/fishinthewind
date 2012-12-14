@@ -5,11 +5,16 @@ from cStringIO import StringIO
 
 from django.db import models
 from django.core.files.base import ContentFile
+from django.core.files.storage import FileSystemStorage
 from PIL import Image
 from boto.s3.connection import S3Connection, SubdomainCallingFormat
 from boto.exception import S3ResponseError
 from sorl.thumbnail import ImageField
 from django.conf import settings
+
+# Used to store gallery .zipfiles locally, instead of at MEDIA_ROOT since there
+# is no need to send them to S3
+fs = FileSystemStorage(location='%s/../blog_wind/' % settings.PROJECT_ROOT)
 
 
 class CommonManager(models.Manager):
@@ -43,8 +48,7 @@ class CommonInfo(models.Model):
 
 
 class Photo(CommonInfo):
-    image = ImageField(upload_to="galleries/photos/%Y/%m/%d",
-                       storage=settings.STATICFILES_STORAGE) # upload directly to S3
+    image = ImageField(upload_to="galleries/photos/%Y/%m/%d")
     height = models.PositiveIntegerField(blank=True, null=True)
     width = models.PositiveIntegerField(blank=True, null=True)
 
@@ -113,7 +117,7 @@ class GalleryUpload(models.Model):
 
     Provided a .zip file of photos it creates a gallery
     """
-    zip_file = models.FileField(upload_to='temp', help_text="Select a .zip file of images to upload")
+    zip_file = models.FileField(upload_to='temp', storage=fs, help_text="Select a .zip file of images to upload")
     gallery = models.ForeignKey(Gallery, null=True, blank=True,
                             help_text="Select a gallery to add these images to. Leave blank to create new gallery.")
     title = models.CharField(max_length=120,
@@ -172,7 +176,7 @@ class GalleryUpload(models.Model):
 
     def delete(self, *args, **kwargs):
         """
-        Deletes the zip file used to create the gallery since it is no longer needed
+        Deletes the zip file used to create the gallery since it is no longer needed 
         """
         os.remove(self.zip_file.path)
         super(GalleryUpload, self).delete(*args, **kwargs)
