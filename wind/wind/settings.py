@@ -1,4 +1,5 @@
 import os
+from django.core.files.storage import FileSystemStorage
 
 PROJECT_ROOT = os.path.dirname(__file__)
 
@@ -99,6 +100,11 @@ LOGGING = {
         },
     }
 }
+
+# Used to store gallery .zipfiles locally, instead of at MEDIA_ROOT since there
+# is no need to send them to S3
+LOCAL_FILE_STORAGE = FileSystemStorage(location='%s/../blog_wind/' % PROJECT_ROOT)
+
 
 try:
     from local_settings import *
