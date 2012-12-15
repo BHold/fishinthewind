@@ -3,7 +3,7 @@
 {% block main %}
 {% load thumbnail %}
     {% for post in posts %}
-        <article class="article{% if post.gallery %} has-gallery{% endif %}">
+        <article class="article">
             <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
             <h2 class="article-title"><a class="article-title_link" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
             <div class={% if post.body %}post-body-spacing{% endif %}>{{ post.body|linebreaks }}</div>

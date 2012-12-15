@@ -15,7 +15,7 @@ def home(request, page=1):
 
     all_posts = Post.objects.get_posted()
 
-    paginator = Paginator(all_posts, 7)
+    paginator = Paginator(all_posts, 5)
 
     # if page number out of range, give last page
     try:
