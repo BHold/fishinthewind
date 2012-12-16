@@ -12,7 +12,7 @@
 body {
     height: 100%;
     width: 100%;
-    font-family: "museo-sans";
+    font-family: "museo-sans", Arial, sans-serif;
     font-weight: 300;
     font-size: 20px;
     line-height: 30px;
@@ -49,7 +49,7 @@ a {
     color: #bbb;
     font-size: 24px;
     float: left;
-    font-family: "bello-pro";
+    font-family: "bello-pro", Arial, sans-serif;
     position: relative;
     top: 2px;
 }
@@ -66,7 +66,7 @@ a {
     color: #bbb;
     font-size: 18px;
     margin-left: 6px;
-    font-family: "proxima-nova";
+    font-family: "proxima-nova", Arial, sans-serif;
     font-weight: 600;
 }
 
@@ -86,7 +86,7 @@ a {
     left: 96px;
     height: 17px;
     width: 17px;
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') 0 0 no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/header-sprite.png') 0 0 no-repeat;
     -webkit-background-size: 63px 48px;
     -moz-background-size: 63px 48px;
     -o-background-size: 63px 48px;
@@ -99,7 +99,7 @@ a {
     left: 62px;
     height: 24px;
     width: 24px;
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -40px 0 no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/header-sprite.png') -40px 0 no-repeat;
     -webkit-background-size: 63px 48px;
     -moz-background-size: 63px 48px;
     -o-background-size: 63px 48px;
@@ -112,7 +112,7 @@ a {
     left: 32px;
     height: 21px;
     width: 21px;
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -18px 0 no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/header-sprite.png') -18px 0 no-repeat;
     -webkit-background-size: 63px 48px;
     -moz-background-size: 63px 48px;
     -o-background-size: 63px 48px;
@@ -120,7 +120,7 @@ a {
 }
 
 #rss-icon:hover, #rss-icon:focus {
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') 0 -18px no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/header-sprite.png') 0 -18px no-repeat;
     -webkit-background-size: 63px 49px;
     -moz-background-size: 63px 49px;
     -o-background-size: 63px 49px;
@@ -128,7 +128,7 @@ a {
 }
 
 #twitter-icon:hover, #twitter-icon:focus {
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -18px -22px no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/header-sprite.png') -18px -22px no-repeat;
     -webkit-background-size: 63px 49px;
     -moz-background-size: 63px 49px;
     -o-background-size: 63px 49px;
@@ -136,7 +136,7 @@ a {
 }
 
 #github-icon:hover, #github-icon:focus {
-    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/twitter-rss-github-sprite.png') -40px -25px no-repeat;
+    background: url('http://d3ry2ziyu0wa1k.cloudfront.net/images/header-sprite.png') -40px -25px no-repeat;
     -webkit-background-size: 63px 49px;
     -moz-background-size: 63px 49px;
     -o-background-size: 63px 49px;
@@ -166,7 +166,7 @@ a {
 }
 
 .article-title_link {
-    font-family: "ff-nuvo-web-pro";
+    font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     color: #333;
     font-size: 36px;
     font-weight: 700;
@@ -191,7 +191,7 @@ a {
 
 .date {
     color: #999;
-    font-family: "ff-nuvo-web-pro";
+    font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     font-weight: 700;
 }
 
@@ -270,13 +270,13 @@ a {
 }
 
 .month {
-    font-family: "ff-nuvo-web-pro";
+    font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     font-weight: 700;
     color: #999;
 }
 
 .writing-title_link, .gallery-title_link {
-    font-family: "museo-sans";
+    font-family: "museo-sans", Arial, sans-serif;
     font-weight: 700;
     color: #555;
 }
@@ -359,7 +359,7 @@ a {
 .resume-name {
     color: #333;
     font-size: 62px;
-    font-family: "ff-enzo-web";
+    font-family: "ff-enzo-web", Arial, sans-serif;
     font-weight: 900;
     line-height: .95em;
 }
@@ -405,3 +405,109 @@ a {
 }
 
 /* End Clearfix */
+
+@media only screen and (max-device-width: 480px) {
+
+    /* General */
+
+    #main {
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    .container {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* End General */
+
+    /* Header */
+
+    #header {
+        text-align: center;
+        position: inherit;
+        height: inherit;
+        width: inherit;
+    }
+
+    #header-title {
+        float: none;
+        display: block;
+    }
+
+    #nav {
+        float: none;
+    }
+
+    #social {
+        display: none;
+    }
+
+    /* End Header */
+
+    /* Home and Posts */
+    .article {
+        padding: 0;
+    }
+
+    .article-title {
+        margin: 30px 0 25px 0;
+    }
+
+    .gallery {
+        text-align: center;
+    }
+
+    .gallery-img {
+        width: 240px;
+        height: 160px;
+    }
+
+    .vertical {
+        height: 360px;
+    }
+
+    /* End Home and Posts */
+
+    /* Archives */
+
+    #month-list {
+        padding: 20px 0;
+    }
+
+    .gallery-preview {
+        width: 100%;
+    }
+
+    .gallery-preview-img {
+        width: 240px;
+        height: 160px;
+    }
+
+    /* End Archives */
+
+    /* Resume */
+
+    #resume-header {
+        text-align: center;
+    }
+
+    .resume-name {
+        font-size: 40px;
+    }
+
+    #resume ul {
+        width: 100%;
+    }
+
+    /* End Resume */
+
+    /* About */
+
+    #brian-picture {
+        display: none;
+    }
+
+    /* End About */
+}

@@ -16,7 +16,7 @@
                     <li class="gallery-preview{% if not forloop.counter|divisibleby:2 %} gallery-preview--odd{% endif %}">
                         <p class="gallery-title"><a class="gallery-title_link" href="{{ gallery_post.get_absolute_url }}">{{ gallery_post.title }}</a></p>
                         {% with photo=gallery_post.gallery.photos.all|random_image %}
-                            {% thumbnail photo.image "350x233" as im %}
+                            {% thumbnail photo.image "348x232" as im %}
                             <a href="{{ gallery_post.get_absolute_url }}"><img class="gallery-preview-img" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img></a>
                             {% endthumbnail %}
                         {% endwith %}

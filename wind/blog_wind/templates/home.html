@@ -10,7 +10,7 @@
             {% if post.gallery %}
                 <div class="gallery">
                 {% for photo in post.gallery.photos.all %}
-                    {% thumbnail photo.image "750" as im %}
+                    {% thumbnail photo.image "748" as im %}
                     <img class="gallery-img{% if im.height > im.width %} vertical{% endif %}" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
                     {% endthumbnail %}
                 {% endfor %}
