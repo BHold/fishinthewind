@@ -22,7 +22,11 @@
     <script type="text/javascript" src="http://use.typekit.com/drj6uxj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style5.css">
+    {% if debug %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+    {% else %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style-3f7f96022f228f0fc5112571912c66d0.css">
+    {% endif %}
 </head>
 
 <body>

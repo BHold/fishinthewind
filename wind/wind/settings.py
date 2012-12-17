@@ -105,6 +105,9 @@ LOGGING = {
 # is no need to send them to S3
 LOCAL_FILE_STORAGE = FileSystemStorage(location='%s/../blog_wind/' % PROJECT_ROOT)
 
+# So can use debug context processor
+INTERNAL_IPS = ('127.0.0.1',)
+
 
 try:
     from local_settings import *
