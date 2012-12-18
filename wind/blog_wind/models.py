@@ -121,7 +121,7 @@ class Post(CommonInfo):
 
     def save(self, *args, **kwargs):
         self.body_highlighted = self.highlight_code(self.body)
-        super(Post, self).save(self, *args, **kwargs)
+        super(Post, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
