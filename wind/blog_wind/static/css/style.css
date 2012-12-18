@@ -385,29 +385,22 @@ a {
 
 /* End Resume */
 
-/* Get rid of TypeKit badge */
+/* Code */
 
-.typekit-badge {
-    display: none !important;
-}
-/* End Typekit */
-
-/* Clearfix */
-
-.clearfix:before, .clearfix:after {
-    content: "";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
+code {
+    display: inline-block;
+    font-size: .85em;
+    line-height: 1.5em;
+    color: #555;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 3px;
+    font-family: Menlo, Monaco, Courier, monospace;
 }
 
-.clearfix {
-    zoom: 1;
-}
-
-/* End Clearfix */
+/* End Code */
 
 /* Mobile device styles */
 @media only screen and (max-device-width: 480px) {
@@ -515,3 +508,27 @@ a {
 
     /* End About */
 }
+
+/* Get rid of TypeKit badge */
+
+.typekit-badge {
+    display: none !important;
+}
+/* End Typekit */
+
+/* Clearfix */
+
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+/* End Clearfix */

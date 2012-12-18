@@ -3,14 +3,31 @@ import os
 import zipfile
 from cStringIO import StringIO
 
-from django.db import models
+from boto.exception import S3ResponseError
+from boto.s3.connection import S3Connection, SubdomainCallingFormat
+from bs4 import BeautifulSoup
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
+from django.db import models
 from PIL import Image
-from boto.s3.connection import S3Connection, SubdomainCallingFormat
-from boto.exception import S3ResponseError
+from pygments import highlight
+from pygments import lexers
+from pygments.formatters import HtmlFormatter
 from sorl.thumbnail import ImageField
-from django.conf import settings
+
+body_help_text = """
+                 Main body text for post.
+
+                 Can use html tags. Should put paragraphs inside p tags: &lt;p&gt;(text here)&lt;p&gt;.
+                 Links should have class 'article-link' for proper styling.
+
+                 Inline code (shell commands, paths, etc.) should be wrapped in &lt;code&gt; elements.
+                 Code inside &lt;pre&gt; elements will be syntax hightlighted.
+                 &lt;pre&gt; tags should have a class name of the language of the code (ie 'python', 'javascript').
+
+                 Text will not be autoescaped on page!
+                 """
 
 
 class CommonManager(models.Manager):
@@ -36,7 +53,8 @@ class CommonInfo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True,
-                    help_text="Controls whether or not object is live to world")
+                   help_text="Controls whether or not object is live to world")
+
     objects = CommonManager()
 
     class Meta:
@@ -48,11 +66,11 @@ class Photo(CommonInfo):
     height = models.PositiveIntegerField(blank=True, null=True)
     width = models.PositiveIntegerField(blank=True, null=True)
 
-    def __unicode__(self):
-        return self.title
-
     class Meta:
         ordering = ['title']
+
+    def __unicode__(self):
+        return self.title
 
     def delete(self, *args, **kwargs):
         """
@@ -61,7 +79,7 @@ class Photo(CommonInfo):
         try:
             path = self.image.path
             os.remove(path)
-        except NotImplementedError: # This is live server, where images are on S3, and thus no absolute file path
+        except NotImplementedError:  # This is live server, where images are on S3, and thus no absolute file path
             conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY, calling_format=SubdomainCallingFormat())
             try:
                 bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
@@ -89,13 +107,21 @@ class Gallery(CommonInfo):
 
 class Post(CommonInfo):
     slug = models.SlugField(unique=True)
-    body = models.TextField(blank=True, help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line. Links should have class 'article-link'.")
+    body = models.TextField(blank=True, help_text=body_help_text)
+    body_highlighted = models.TextField(blank=True)
     publish_at = models.DateTimeField(default=datetime.datetime.now(),
                                       help_text="Date and time post should become active.")
     gallery = models.ForeignKey(Gallery, related_name="post", blank=True, null=True)
 
+    class Meta:
+        ordering = ['-publish_at', '-modified', '-created']
+
     def __unicode__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.body_highlighted = self.highlight_code(self.body)
+        super(Post, self).save(self, *args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
@@ -103,8 +129,38 @@ class Post(CommonInfo):
             'slug': self.slug
         })
 
-    class Meta:
-        ordering = ['-publish_at', '-modified', '-created']
+    def highlight_code(self, body):
+        """
+        Highlight code in all <pre> elements of body
+
+        BeautifulSoup parses the HTML and extracts all <pre> blocks
+        Contents of each <pre> are converted to unicode
+        with '<', '>', and '&' unescaped since BeatifulSoup might think
+        and '<....>' is a tag and try and close it, etc.
+
+        Then send that unicode through pygments to lex, format, and style it
+
+        The lexer is chosen based on the class of the <pre> (ie 'python', etc)
+
+        Finally replace those <pre> blocks with the new highlighted markup
+        and return it as unicode
+        """
+        soup = BeautifulSoup(body)
+        preblocks = soup.findAll('pre')
+        for pre in preblocks:
+            if hasattr(pre, 'class'):
+                try:
+                    code = ''.join([unicode(item) for item in pre.contents])
+                    code = self.unescape_html(code)
+                    lexer = lexers.get_lexer_by_name(pre['class'][0])
+                    code_hl = highlight(code, lexer, HtmlFormatter())
+                    pre.replaceWith(BeautifulSoup(code_hl))
+                except:
+                    raise
+        return soup
+
+    def unescape_html(self, html):
+        return html.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
 
 
 class GalleryUpload(models.Model):
@@ -125,6 +181,13 @@ class GalleryUpload(models.Model):
         super(GalleryUpload, self).save(*args, **kwargs)
         self.process_zipfile()
         self.delete()
+
+    def delete(self, *args, **kwargs):
+        """
+        Deletes the zip file used to create the gallery since it is no longer needed
+        """
+        os.remove(self.zip_file.path)
+        super(GalleryUpload, self).delete(*args, **kwargs)
 
     def process_zipfile(self):
         if os.path.isfile(self.zip_file.path):
@@ -157,7 +220,7 @@ class GalleryUpload(models.Model):
                         # but it must be called immediately after the constructor
                         trial_image = Image.open(img_file)
                         trial_image.verify()
-                    except Exception: # PIL doesn't recognize file as an image, so we skip it
+                    except Exception:  # PIL doesn't recognize file as an image, so we skip it
                         raise ValidationError('Image failed to validate: %s'
                                               % filename)
                     # Rewind image pointers back to start of file
@@ -175,10 +238,3 @@ class GalleryUpload(models.Model):
                         gallery.photos.add(photo)
                     count += 1
             zf.close()
-
-    def delete(self, *args, **kwargs):
-        """
-        Deletes the zip file used to create the gallery since it is no longer needed
-        """
-        os.remove(self.zip_file.path)
-        super(GalleryUpload, self).delete(*args, **kwargs)
