@@ -4,6 +4,7 @@ import zipfile
 from cStringIO import StringIO
 
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from PIL import Image
 from boto.s3.connection import S3Connection, SubdomainCallingFormat
@@ -88,7 +89,7 @@ class Gallery(CommonInfo):
 
 class Post(CommonInfo):
     slug = models.SlugField(unique=True)
-    body = models.TextField(blank=True, help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line. Links should have class 'article-link'")
+    body = models.TextField(blank=True, help_text="Main body text for post. Can use html tags. Paragraph tags will be used automatically before/after open line. Links should have class 'article-link'.")
     publish_at = models.DateTimeField(default=datetime.datetime.now(),
                                       help_text="Date and time post should become active.")
     gallery = models.ForeignKey(Gallery, related_name="post", blank=True, null=True)
@@ -157,7 +158,11 @@ class GalleryUpload(models.Model):
                         trial_image = Image.open(img_file)
                         trial_image.verify()
                     except Exception: # PIL doesn't recognize file as an image, so we skip it
-                        continue
+                        raise ValidationError('Image failed to validate: %s'
+                                              % filename)
+                    # Rewind image pointers back to start of file
+                    if hasattr(data, 'seek') and callable(data.seek):
+                        data.seek(0)
 
                     title = self.title + ' ' + str(count).zfill(2)
                     try:
@@ -173,7 +178,7 @@ class GalleryUpload(models.Model):
 
     def delete(self, *args, **kwargs):
         """
-        Deletes the zip file used to create the gallery since it is no longer needed 
+        Deletes the zip file used to create the gallery since it is no longer needed
         """
         os.remove(self.zip_file.path)
         super(GalleryUpload, self).delete(*args, **kwargs)
