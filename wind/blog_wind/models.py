@@ -157,7 +157,7 @@ class Post(CommonInfo):
                     pre.replaceWith(BeautifulSoup(code_hl))
                 except:
                     raise
-        return soup
+        return unicode(soup)
 
     def unescape_html(self, html):
         return html.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
