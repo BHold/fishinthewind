@@ -310,7 +310,8 @@ a {
 
 #about-brian {
     padding-top: 50px;
-    font: 18px/1.6;
+    font-size: 18px;
+    line-height: 1.65;
 }
 
 #about-brian p {
@@ -615,7 +616,8 @@ code {
     }
 
     .resume-name {
-        font: 24px/1;
+        font-size: 40px;
+        line-height: 1;
     }
 
     #resume ul {
