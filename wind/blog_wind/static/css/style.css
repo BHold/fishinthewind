@@ -12,11 +12,8 @@
 body {
     height: 100%;
     width: 100%;
-    font-family: "museo-sans", Arial, sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 30px;
     color: #444;
+    font: 300 20px/1.5 "museo-sans", Arial, sans-serif;
 }
 
 .container {
@@ -47,11 +44,10 @@ a {
 
 #header-title {
     color: #bbb;
-    font-size: 24px;
     float: left;
-    font-family: "bello-pro", Arial, sans-serif;
     position: relative;
     top: 2px;
+    font: 24px/1.5 "bello-pro", Arial, sans-serif;
 }
 
 #header-title:hover, #header-title:focus {
@@ -59,15 +55,14 @@ a {
 }
 
 #nav {
+    margin-top: 2px;
     float: right;
 }
 
 .nav_link {
     color: #bbb;
-    font-size: 18px;
     margin-left: 6px;
-    font-family: "proxima-nova", Arial, sans-serif;
-    font-weight: 600;
+    font: 600 18px/1.5 "proxima-nova", Arial, sans-serif;
 }
 
 .nav_link:hover, .nav_link:focus {
@@ -82,7 +77,7 @@ a {
 
 #rss-icon {
     position: absolute;
-    top: 8px;
+    top: 10px;
     left: 96px;
     height: 17px;
     width: 17px;
@@ -95,7 +90,7 @@ a {
 
 #github-icon {
     position: absolute;
-    top: 4px;
+    top: 6px;
     left: 62px;
     height: 24px;
     width: 24px;
@@ -108,7 +103,7 @@ a {
 
 #twitter-icon {
     position: absolute;
-    top: 6px;
+    top: 8px;
     left: 32px;
     height: 21px;
     width: 21px;
@@ -166,10 +161,8 @@ a {
 }
 
 .article-title_link {
-    font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     color: #333;
-    font-size: 36px;
-    font-weight: 700;
+    font: 700 36px/1.25 "ff-nuvo-web-pro", Arial, sans-serif;
 }
 
 .article-title_link:hover, .article-title_link:focus {
@@ -348,7 +341,6 @@ a {
 }
 
 #resume-header {
-    font-size: 22px;
     text-align: right;
     margin-bottom: 35px;
 }
@@ -361,10 +353,7 @@ a {
 
 .resume-name {
     color: #333;
-    font-size: 62px;
-    font-family: "ff-enzo-web", Arial, sans-serif;
-    font-weight: 900;
-    line-height: .95em;
+    font: 900 62px/.95 "ff-enzo-web", Arial, sans-serif;
 }
 
 #res-email {
@@ -413,15 +402,13 @@ a {
 
 code {
     display: inline-block;
-    font-size: .85em;
-    line-height: 1.5em;
     color: #555;
     border: 1px solid #DDD;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     padding: 0 3px;
-    font-family: Menlo, Monaco, Courier, monospace;
+    font: .85em/1.5 Menlo, Monaco, Courier, monospace;
 }
 
 .highlight {
@@ -434,10 +421,8 @@ code {
     -moz-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
-    font-family: Menlo, Monaco, Courier, monospace;
-    font-size: 15px;
-    line-height: 20px;
     overflow-x: auto;
+    font: 15px/1.4 Menlo, Monaco, Courier, monospace;
 }
 
 /* Code Syntax Styles: Solarized Light */
@@ -630,7 +615,7 @@ code {
     }
 
     .resume-name {
-        font-size: 40px;
+        font: 30px/1;
     }
 
     #resume ul {
