@@ -9,7 +9,7 @@ from boto.s3.connection import S3Connection
 from cssmin import cssmin
 from django.conf import settings
 from hashlib import md5
-from fabric.api import local, run, env, cd, lcd
+from fabric.api import local, run, env, cd, lcd, put
 from fabric.contrib.console import confirm
 from bs4 import BeautifulSoup
 
@@ -40,7 +40,9 @@ def migrate_database():
 
 
 def _compress_content(content):
-    """Gzip a given string."""
+    """
+    Gzip a given string.
+    """
     buf = StringIO()
     with GzipFile(fileobj=buf, mode='wb') as gzf:
         gzf.write(content)
@@ -136,4 +138,4 @@ def deploy():
 
 
 def transfer_settings():
-    local("scp /Users/bhold/Sites/blog/wind/wind/live_settings.py bhold@bhold.webfactional.com:/home/bhold/webapps/django/fishinthewind/wind/wind/live_settings.py")
+    put('/Users/bhold/Sites/blog/wind/wind/live_settings.py', '/home/bhold/webapps/django/fishinthewind/wind/wind/live_settings.py')

@@ -1,3 +1,4 @@
+from __future__ import with_statement
 import datetime
 import os
 import zipfile
@@ -190,50 +191,49 @@ class GalleryUpload(models.Model):
 
     def process_zipfile(self):
         if os.path.isfile(self.zip_file.path):
-            zf = zipfile.ZipFile(self.zip_file.path)
-            bad_file = zf.testzip()
-            if bad_file:
-                raise Exception('"%s" in the .zip file is corrupt.' % bad_file)
-            if self.gallery:
-                gallery = self.gallery
-            else:
-                gallery = Gallery.objects.create(title=self.title)
-            count = 1
-            for filename in sorted(zf.namelist()):
-                if filename.startswith('__'):  # don't process meta files
-                    continue
-                data = zf.read(filename)
-                if len(data):
-                    img_file = StringIO(data)
-                    try:
-                        # load() can spot a truncated JPEG
-                        trial_image = Image.open(img_file)
-                        trial_image.load()
+            with zipfile.ZipFile(self.zip_file.path) as zf:
+                bad_file = zf.testzip()
+                if bad_file:
+                    raise ValidationError('"{0}" in the .zip file is corrupt.'.format(bad_file))
+                if self.gallery:
+                    gallery = self.gallery
+                else:
+                    gallery = Gallery.objects.create(title=self.title)
+                count = 1
+                for filename in sorted(zf.namelist()):
+                    if filename.startswith('__'):  # don't process meta files
+                        continue
+                    data = zf.read(filename)
+                    if len(data):
+                        img_file = StringIO(data)
+                        try:
+                            # load() can spot a truncated JPEG
+                            trial_image = Image.open(img_file)
+                            trial_image.load()
 
-                        # Since we're about to use the file again we have to reset the
-                        # file object if possible.
-                        if hasattr(img_file, 'reset'):
-                            img_file.reset()
+                            # Since we're about to use the file again we have to reset the
+                            # file object if possible.
+                            if hasattr(img_file, 'reset'):
+                                img_file.reset()
 
-                        # verify() can spot a corrupt PNG
-                        # but it must be called immediately after the constructor
-                        trial_image = Image.open(img_file)
-                        trial_image.verify()
-                    except Exception:  # PIL doesn't recognize file as an image, so we skip it
-                        raise ValidationError('Image failed to validate: %s'
-                                              % filename)
-                    # Rewind image pointers back to start of file
-                    if hasattr(data, 'seek') and callable(data.seek):
-                        data.seek(0)
+                            # verify() can spot a corrupt PNG
+                            # but it must be called immediately after the constructor
+                            trial_image = Image.open(img_file)
+                            trial_image.verify()
+                        except:  # PIL doesn't recognize file as an image
+                            raise ValidationError('Image failed to validate: {0}'.format(filename))
 
-                    title = self.title + ' ' + str(count).zfill(2)
-                    try:
-                        photo = Photo.objects.get(title=title)
-                    except Photo.DoesNotExist:
-                        photo = Photo.objects.create(title=title)
-                        photo.width = trial_image.size[0]
-                        photo.height = trial_image.size[1]
-                        photo.image.save(filename, ContentFile(data))
-                        gallery.photos.add(photo)
-                    count += 1
-            zf.close()
+                        # Rewind image pointers back to start of file
+                        if hasattr(data, 'seek') and callable(data.seek):
+                            data.seek(0)
+
+                        title = self.title + ' ' + str(count).zfill(2)
+                        try:
+                            photo = Photo.objects.get(title=title)
+                        except Photo.DoesNotExist:
+                            photo = Photo.objects.create(title=title)
+                            photo.width = trial_image.size[0]
+                            photo.height = trial_image.size[1]
+                            photo.image.save(filename, ContentFile(data))
+                            gallery.photos.add(photo)
+                        count += 1
