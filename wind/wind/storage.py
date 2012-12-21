@@ -14,7 +14,7 @@ class StaticToS3Storage(S3BotoStorage):
         cleaned_name = self._clean_name(name)
         name = self._normalize_name(cleaned_name)
         headers = self.headers.copy()
-        content_type = getattr(content,'content_type', mimetypes.guess_type(name)[0] or Key.DefaultContentType)
+        content_type = getattr(content, 'content_type', mimetypes.guess_type(name)[0] or Key.DefaultContentType)
 
         if self.gzip and content_type in self.gzip_content_types:
             content = self._compress_content(content)

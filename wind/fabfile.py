@@ -1,6 +1,7 @@
 from __future__ import with_statement
-import gzip
+from gzip import GzipFile
 import os
+from StringIO import StringIO
 
 os.environ['DJANGO_SETTINGS_MODULE'] = "wind.settings"
 
@@ -38,11 +39,12 @@ def migrate_database():
         run("./manage.py migrate blog_wind")
 
 
-def _compress_content(filename, content):
+def _compress_content(content):
     """Gzip a given string."""
-    with gzip.open(filename, 'wb') as f:
-        f.write(content)
-    return filename
+    buf = StringIO()
+    with GzipFile(fileobj=buf, mode='wb') as gzf:
+        gzf.write(content)
+    return buf.getvalue()
 
 
 def _s3_upload(filename, content, content_type):
@@ -65,14 +67,10 @@ def _s3_upload(filename, content, content_type):
 
     headers = settings.AWS_HEADERS
 
-    temp_file = TEMP_ROOT + filename
-    temp_file = _compress_content(temp_file, content)
+    compressed = _compress_content(content)
     headers.update({'Content-Encoding': 'gzip'})
 
-    k.set_contents_from_filename(temp_file, headers=headers, policy='public-read')
-
-    # No longer need the temp file
-    os.remove(temp_file)
+    k.set_contents_from_string(compressed, headers=headers, policy='public-read')
 
 
 def update_css():
@@ -112,6 +110,7 @@ def deploy():
     Asks user if we need to update css, syncdb, or migrate and responds
     accordingly.
     """
+    new_css = sync = migrate = False
     if confirm("Do we need to update css, syndb, or migrate?", default=False):
         new_css = confirm("Update CSS?")
         sync = confirm("Sync database?")
