@@ -11,8 +11,7 @@ from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db import models
 from PIL import Image
-from pygments import highlight
-from pygments import lexers
+from pygments import highlight, lexers
 from pygments.formatters import HtmlFormatter
 from sorl.thumbnail import ImageField
 
