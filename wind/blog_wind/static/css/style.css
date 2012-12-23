@@ -375,13 +375,6 @@ a {
 
 /* End Resume */
 
-/* Get rid of TypeKit badge */
-
-.typekit-badge {
-    display: none !important;
-}
-/* End Typekit */
-
 /* Clearfix */
 
 .clearfix:before, .clearfix:after {
@@ -415,7 +408,7 @@ code {
 .highlight {
     background-color: #fdf6e3;
     margin: 30px auto;
-    padding: 10px 14px;
+    padding: 14px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;

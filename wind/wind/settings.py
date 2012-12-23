@@ -108,6 +108,18 @@ LOCAL_FILE_STORAGE = FileSystemStorage(location='%s/../blog_wind/' % PROJECT_ROO
 # So can use debug context processor
 INTERNAL_IPS = ('127.0.0.1',)
 
+LOCAL_PROJECT_ROOT = PROJECT_ROOT + "/../"
+REMOTE_PROJECT_ROOT = "/home/bhold/webapps/django/fishinthewind/wind/"
+BASE_HTML_FILENAME = "base.html"
+LIVE_SETTINGS = PROJECT_ROOT + "/live_settings.py"
+REMOTE_LIVE_SETTINGS = REMOTE_PROJECT_ROOT + "wind/live_settings.py"
+REMOTE_HOST_DOMAIN = "bhold.webfactional.com"
+REMOTE_HOST_USER = "bhold"
+RESTART_PATH = "$HOME/webapps/django/apache2/bin/restart"
+RUN_TESTS = True
+TEST_APPS = ['blog_wind']
+APPS_TO_MIGRATE = ['blog_wind']
+
 
 try:
     from local_settings import *
