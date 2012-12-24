@@ -1,4 +1,5 @@
 from __future__ import with_statement
+from functools import wraps
 import os
 
 try:
@@ -24,31 +25,64 @@ LOCAL_PROJECT_ROOT = getattr(settings, "LOCAL_PROJECT_ROOT", None)
 STATIC_DIRS = getattr(settings, "STATICFILES_DIRS", ())
 TEMPLATE_DIRS = getattr(settings, "TEMPLATE_DIRS", ())
 BASE_HTML_FILENAME = getattr(settings, "BASE_HTML_FILENAME", "")
+LIVE_SETTINGS = getattr(settings, "LIVE_SETTINGS", None)
+REMOTE_LIVE_SETTINGS = getattr(settings, "REMOTE_LIVE_SETTINGS", None)
+RUN_TESTS = getattr(settings, "RUN_TESTS", False)
+TEST_APPS = getattr(settings, "TEST_APPS", ())
+APPS_TO_MIGRATE = getattr(settings, "APPS_TO_MIGRATE", ())
+REMOTE_HOST_DOMAIN = getattr(settings, "REMOTE_HOST_DOMAIN", None)
+REMOTE_HOST_USER = getattr(settings, "REMOTE_HOST_USER", None)
+RESTART_PATH = getattr(settings, "RESTART_PATH", None)
 ACCESS_KEY = getattr(settings, "AWS_ACCESS_KEY_ID", None)
 SECRET_ACCESS_KEY = getattr(settings, "AWS_SECRET_ACCESS_KEY", None)
 BUCKET_NAME = getattr(settings, "AWS_STORAGE_BUCKET_NAME", None)
-HEADERS = getattr(settings, "AWS_HEADERS", None)
+HEADERS = getattr(settings, "AWS_HEADERS", {})
 AUTO_CREATE_BUCKET = getattr(settings, "AWS_AUTO_CREATE_BUCKET", False)
 SHOULD_GZIP = getattr(settings, "AWS_IS_GZIPPED", True)
 BUCKET_ACL = getattr(settings, "BUCKET_ACL", "public-read")
 DEFAULT_ACL = getattr(settings, "DEFAULT_ACL", "public-read")
-LIVE_SETTINGS = getattr(settings, "LIVE_SETTINGS", None)
-REMOTE_LIVE_SETTINGS = getattr(settings, "REMOTE_LIVE_SETTINGS", None)
-REMOTE_HOST_DOMAIN = getattr(settings, "REMOTE_HOST_DOMAIN", None)
-REMOTE_HOST_USER = getattr(settings, "REMOTE_HOST_USER", None)
-RUN_TESTS = getattr(settings, "RUN_TESTS", False)
-TEST_APPS = getattr(settings, "TEST_APPS", ())
-RESTART_PATH = getattr(settings, "RESTART_PATH", None)
-APPS_TO_MIGRATE = getattr(settings, "APPS_TO_MIGRATE", ())
 
 if SHOULD_GZIP:
     from gzip import GzipFile
 
-if not REMOTE_HOST_DOMAIN or not REMOTE_HOST_USER:
-    raise ImproperlyConfigured("You must specify REMOTE_HOST_DOMAIN and "
-        "REMOTE_HOST_USER variables in your settings.py")
+# fabric defaults env.user to user's current system username
+if REMOTE_HOST_USER:
+    env.user = REMOTE_HOST_USER
+env.hosts = []
 
-env.hosts = ["{0}@{1}".format(REMOTE_HOST_USER, REMOTE_HOST_DOMAIN)]
+
+def check_local_root(func):
+    """
+    Checks to make sure LOCAL_PROJECT_ROOT is set properly
+
+    Wraps functions that require LOCAL_PROJECT_ROOT so I don't have to repeat
+    the code in each
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not LOCAL_PROJECT_ROOT and os.path.isdir(LOCAL_PROJECT_ROOT):
+            raise ImproperlyConfigured("Please set LOCAL_PROJECT_ROOT in "
+                                       "your settings.")
+
+        return func(*args, **kwargs)
+    return wrapper
+
+
+def check_remote_root(func):
+    """
+    Checks to make sure REMOTE_PROJECT_ROOT is set
+
+    Wraps functions that require REMOTE_PROJECT_ROOT so I don't have to repeat
+    the code in each
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not REMOTE_PROJECT_ROOT:
+            raise ImproperlyConfigured("Please set REMOTE_PROJECT_ROOT in "
+                                       "your settings.")
+
+        return func(*args, **kwargs)
+    return wrapper
 
 
 def _compress_content(content):
@@ -82,6 +116,7 @@ def _s3_upload(filename, content, content_type):
     if not k:
         k = bucket.new_key(filename)
     k.set_metadata("Content-Type", content_type)
+    HEADERS.update({"Content-Type", content_type})
 
     if SHOULD_GZIP:
         content = _compress_content(content)
@@ -114,18 +149,24 @@ def _get_base_html():
     if html:
         return html
     raise ImproperlyConfigured("Can't find BASE_HTML_FILE: '{0}'. Make sure "
-                        "it can be accessed from one of your TEMPLATE_DIRS"
+                        "it can be accessed from one of your TEMPLATE_DIRS."
                         .format(BASE_HTML_FILENAME))
 
 
 def _get_static_file(filepath):
+    """
+    Tries to find a given staticfile path within one of the directories in
+    STATIC_DIRS
+
+    Raises ImproperlConfigured if it can't find the file
+    """
     if "{{ STATIC_URL }}" in filepath:
         filepath = filepath.replace("{{ STATIC_URL }}", "")
     static_file = _find_file(filepath, STATIC_DIRS)
     if static_file:
         return static_file
     raise ImproperlyConfigured("Can't find static file: '{0}'. Make sure "
-                        "it can be accessed from one of your STATIC_DIRS"
+                        "it can be accessed from one of your STATIC_DIRS."
                         .format(filepath))
 
 
@@ -150,9 +191,12 @@ def _update_static(exts):
     for ext in exts:
         files_to_include = soup.select(".minify-{0}".format(ext))
         if not files_to_include:
-            continue
+            raise ImproperlyConfigured("In order to concatenate and minify {0}"
+                " files, you need to set a class of 'minify-{1} on the "
+                "links/scripts you want to include".format(ext.uppers(), ext))
 
         combined = ""
+        # Concatenate selected files into 'combined'
         for static_file in files_to_include:
             if ext == "css":
                 fname = _get_static_file(static_file["href"])
@@ -193,29 +237,6 @@ def _update_static(exts):
 
 
 @task
-def syncdb():
-    """
-    Syncs the database on server
-    """
-    with cd(REMOTE_PROJECT_ROOT):
-        run("./manage.py syncdb")
-
-
-@task
-def migrate_database():
-    """
-    Migrates the database on server
-    """
-    if not APPS_TO_MIGRATE:
-        raise ImproperlyConfigured("Setting APPS_TO_MIGRATE must be set in "
-                                   "order to migrate")
-    with cd(REMOTE_PROJECT_ROOT):
-        for app in APPS_TO_MIGRATE:
-            run("./manage.py schemamigration {0} --auto".format(app))
-            run("./manage.py migrate {0}".format(app))
-
-
-@task
 def update_css():
     """
     Combines, minifies, and compresses CSS stylesheets.
@@ -237,6 +258,31 @@ def update_css_and_js():
     Combines, minifies, and compresses CSS stylesheets and JS scripts.
     """
     _update_static(("css", "js"))
+
+
+@task
+@check_remote_root
+def syncdb():
+    """
+    Syncs the database on server
+    """
+    with cd(REMOTE_PROJECT_ROOT):
+        run("./manage.py syncdb")
+
+
+@task
+@check_remote_root
+def migrate_database():
+    """
+    Migrates the database on server
+    """
+    if not APPS_TO_MIGRATE:
+        raise ImproperlyConfigured("Setting APPS_TO_MIGRATE must be set in "
+                                   "order to migrate")
+    with cd(REMOTE_PROJECT_ROOT):
+        for app in APPS_TO_MIGRATE:
+            run("./manage.py schemamigration {0} --auto".format(app))
+            run("./manage.py migrate {0}".format(app))
 
 
 @task
@@ -263,6 +309,7 @@ def restart():
 
 
 @task
+@check_local_root
 def run_tests():
     """
     Runs tests for the project
@@ -277,7 +324,9 @@ def run_tests():
 
 
 @task
-def deploy():
+@check_local_root
+@check_remote_root
+def deploy(amend=False, restart=True):
     """
     Deploys the blog to the server.
 
@@ -297,12 +346,18 @@ def deploy():
     if new_css or new_js:
         if new_css and new_js:
             update_css_and_js()
-        if new_css:
+        elif new_css:
             update_css()
-        if new_js:
+        else:
             update_js()
         with lcd(LOCAL_PROJECT_ROOT):
-            local("git commit -a -m 'New static links in base HTML.'")
+            if amend:
+                # Be sure you don't choose this option if you would be amending
+                # a commit that you've already pushed!
+                local("git commit -a --amend -C HEAD")
+            else:
+                # Default
+                local("git commit -a -m 'New static links in base HTML.'")
 
     run_tests()
 
@@ -317,4 +372,5 @@ def deploy():
     if migrate:
         migrate_database()
 
-    restart()
+    if restart:
+        restart()
