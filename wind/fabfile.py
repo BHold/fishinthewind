@@ -48,7 +48,7 @@ if SHOULD_GZIP:
 # fabric defaults env.user to user's current system username
 if REMOTE_HOST_USER:
     env.user = REMOTE_HOST_USER
-env.hosts = []
+env.hosts = [REMOTE_HOST_DOMAIN]
 
 
 def check_local_root(func):
@@ -326,7 +326,7 @@ def run_tests():
 @task
 @check_local_root
 @check_remote_root
-def deploy(amend=False, restart=True):
+def deploy(amend=False):
     """
     Deploys the blog to the server.
 
@@ -372,5 +372,5 @@ def deploy(amend=False, restart=True):
     if migrate:
         migrate_database()
 
-    if restart:
+    if RESTART_PATH:
         restart()
