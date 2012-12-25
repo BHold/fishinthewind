@@ -8,9 +8,10 @@ from blog_wind.feeds import RecentFeed
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^grappelli/', include('grappelli.urls')),
     # Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     # Resume
     url(r'^resume$', direct_to_template, {'template': 'resume.html'}, name='resume'),
     # Blog

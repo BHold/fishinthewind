@@ -13,7 +13,7 @@ body {
     height: 100%;
     width: 100%;
     color: #444;
-    font: 300 20px/1.5 "museo-sans", Arial, sans-serif;
+    font: 300 19px/1.5 "museo-sans", Arial, sans-serif;
 }
 
 .container {
@@ -169,6 +169,12 @@ a {
     color: #111;
 }
 
+.section-header {
+    color: #333;
+    font: 700 25px/1.25 "ff-nuvo-web-pro", Arial, sans-serif;
+    margin: 37px 0;
+}
+
 .article-link {
     color: #66f;
     font-weight: 700;
@@ -186,6 +192,21 @@ a {
     color: #999;
     font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     font-weight: 700;
+}
+
+.def {
+    font-style: italic;
+    font-weight: 300;
+    margin: 35px 0;
+    padding-left: 30px;
+}
+
+dfn {
+    font-weight: 500;
+}
+
+.article-ul {
+    margin-left: 35px;
 }
 
 .post-body-spacing {

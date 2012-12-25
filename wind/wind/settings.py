@@ -67,12 +67,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'django.contrib.admindocs',
 
     'south',
     'storages',
     'sorl.thumbnail',
+    'grappelli',
+
+    'django.contrib.admin', # Grappelli needs to be installed before admin
 
     'blog_wind'
 )
@@ -108,6 +110,7 @@ LOCAL_FILE_STORAGE = FileSystemStorage(location='%s/../blog_wind/' % PROJECT_ROO
 # So can use debug context processor
 INTERNAL_IPS = ('127.0.0.1',)
 
+# Settings used by fabfile
 LOCAL_PROJECT_ROOT = PROJECT_ROOT + "/../"
 REMOTE_PROJECT_ROOT = "/home/bhold/webapps/django/fishinthewind/wind/"
 BASE_HTML_FILENAME = "base.html"
@@ -119,6 +122,9 @@ RESTART_PATH = "$HOME/webapps/django/apache2/bin/restart"
 RUN_TESTS = True
 TEST_APPS = ['blog_wind']
 APPS_TO_MIGRATE = ['blog_wind']
+
+# Grappelli settings
+GRAPPELLI_ADMIN_TITLE = "Brian Holdefehr"
 
 
 try:
