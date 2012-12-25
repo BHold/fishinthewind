@@ -116,11 +116,11 @@ def _s3_upload(filename, content, content_type):
     if not k:
         k = bucket.new_key(filename)
     k.set_metadata("Content-Type", content_type)
-    HEADERS.update({"Content-Type", content_type})
+    HEADERS["Content-Type"] = content_type
 
     if SHOULD_GZIP:
         content = _compress_content(content)
-        HEADERS.update({"Content-Encoding": "gzip"})
+        HEADERS["Content-Encoding"] = "gzip"
 
     k.set_contents_from_string(content,
                                headers=HEADERS, policy=DEFAULT_ACL)
