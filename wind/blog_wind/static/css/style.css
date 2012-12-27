@@ -55,14 +55,15 @@ a {
 }
 
 #nav {
-    margin-top: 2px;
+    margin-top: 4px;
     float: right;
 }
 
 .nav_link {
     color: #bbb;
     margin-left: 6px;
-    font: 600 18px/1.5 "proxima-nova", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
 }
 
 .nav_link:hover, .nav_link:focus {
@@ -207,6 +208,10 @@ dfn {
 
 .article-ul {
     margin-left: 35px;
+}
+
+.article-ul li {
+    margin-bottom: 15px;
 }
 
 .post-body-spacing {
@@ -535,7 +540,7 @@ code {
 .highlight .gi { color: #586e75 } /* Generic.Inserted */
 .highlight .go { color: #586e75 } /* Generic.Output */
 .highlight .gp { color: #586e75 } /* Generic.Prompt */
-.highlight .gs { font-weight: 586e75 } /* Generic.Strong */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .gu { color: #586e75; font-weight: bold } /* Generic.Subheading */
 .highlight .gt { color: #586e75 } /* Generic.Traceback */
 
