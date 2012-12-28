@@ -18,7 +18,7 @@ class StaticToS3Storage(S3BotoStorage):
 
         if self.gzip and content_type in self.gzip_content_types:
             content = self._compress_content(content)
-            headers.update({'Content-Encoding': 'gzip'})
+            headers['Content-Encoding'] = 'gzip'
 
         content.name = cleaned_name
         k = self.bucket.get_key(self._encode_name(name))

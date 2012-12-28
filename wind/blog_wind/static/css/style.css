@@ -206,12 +206,12 @@ dfn {
     font-weight: 500;
 }
 
-.article-ul {
+.article-list {
     margin-left: 35px;
 }
 
-.article-ul li {
-    margin-bottom: 15px;
+.article-list p {
+    margin: 15px 0;
 }
 
 .post-body-spacing {
