@@ -8,10 +8,10 @@ from blog_wind.feeds import RecentFeed
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^grappelli/', include('grappelli.urls')),
     # Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')),
     # Resume
     url(r'^resume$', direct_to_template, {'template': 'resume.html'}, name='resume'),
     # Blog
@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^writing$', 'blog_wind.views.writing', name='writing'),
     url(r'^photos$', 'blog_wind.views.galleries', name='galleries'),
     url(r'^about$', direct_to_template, {'template': 'about.html'}, name='about'),
+    url(r'^preview/(?P<slug>[-\w]+)$', 'blog_wind.views.preview', name='preview'),
     url(r'^(?P<slug>[-\w]+)$', 'blog_wind.views.post', name='post'),
     # RSS
     url(r'^feeds/recent$', RecentFeed(), name='feed'),

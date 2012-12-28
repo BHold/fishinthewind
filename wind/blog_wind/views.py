@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
@@ -32,6 +33,26 @@ def home(request, page=1):
 def post(request, slug):
     """
     Displays an individual post
+
+    Post must be active and published date must be in the past
+    """
+
+    try:
+        post = Post.objects.get_posted().get(slug=slug)
+    except Post.DoesNotExist:
+        raise Http404
+
+    variables = RequestContext(request, {
+        'post': post
+    })
+    return render_to_response('post.html', variables)
+
+
+def preview(request, slug):
+    """
+    Displays an individual post in preview mode
+
+    Post does not need to be active and publish date can be in future
     """
 
     post = get_object_or_404(Post, slug=slug)
@@ -39,7 +60,7 @@ def post(request, slug):
     variables = RequestContext(request, {
         'post': post
     })
-    return render_to_response('post.html', variables)
+    return render_to_response('preview.html', variables)
 
 
 def writing(request):
