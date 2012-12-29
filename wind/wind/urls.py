@@ -8,6 +8,8 @@ from blog_wind.feeds import RecentFeed
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    # Analytics
+    url(r'^googlef1fcfa057d2c8dac.html$', direct_to_template, {'template': 'googlef1fcfa057d2c8dac.html'}),
     # Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
