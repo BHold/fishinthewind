@@ -17,7 +17,9 @@
    try{Typekit.load();}catch(e){}
   </script>
   {% if debug %}
-  <link class="minify-css" href="{{ STATIC_URL }}css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}less/combined.less" />
+  <!--<link class="minify-css" href="{{ STATIC_URL }}css/style.css" rel="stylesheet"/>-->
+  <script type="text/javascript" src="{{ STATIC_URL }}js/less-1.3.3.min.js"></script>
   {% else %}
   <link class="minified-css" href="{{ STATIC_URL }}css/0a897774c1a337a1ef24c9e0fd641f45.min.css" rel="stylesheet"/>
   {% endif %}

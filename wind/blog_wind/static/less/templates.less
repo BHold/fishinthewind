@@ -1,0 +1,45 @@
+.rounded (@radius) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.border-radius (@top-left, @top-right, @bottom-right, @bottom-left) {
+    -webkit-border-radius: @top-left, @top-right, @bottom-right, @bottom-left;
+    -moz-border-radius: @top-left, @top-right, @bottom-right, @bottom-left;
+    border-radius: @top-left, @top-right, @bottom-right, @bottom-left;
+}
+
+.background-size (@x, @y) {
+    -webkit-background-size: @x @y;
+    -moz-background-size: @x @y;
+    -o-background-size: @x @y;
+    background-size: @x @y;
+}
+
+.box-sizing (@option) {
+    -moz-box-sizing: @option;
+    -webkit-box-sizing: @option;
+    box-sizing: @option;
+}
+
+.linear-gradient (@bg, @top, @bottom) {
+    background: @bg;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(@top), to(@bottom));
+    background-image: -webkit-linear-gradient(top, @top, @bottom);
+    background-image: -moz-linear-gradient(top, @top, @bottom);
+    background-image: -o-linear-gradient(top, @top, @bottom);
+    background-image: linear-gradient(top, @top, @bottom);
+}
+
+.box-shadow (@x, @y, @blur, @alpha) {
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+    box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.inner-shadow (@x, @y, @blur, @alpha) {
+    -moz-box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
+    -webkit-box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
+    box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
+}
