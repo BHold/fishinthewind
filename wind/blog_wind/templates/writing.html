@@ -6,12 +6,12 @@
 
     {% regroup writings by publish_at|date:"F, Y" as writings_by_month %}
 
-    <ol id="month-list">
+    <ol class="month-list">
     {% for month in writings_by_month %}
         <li class="month">{{ month.grouper }}
         <ol class="writing-list">
             {% for writing in month.list %}
-                <li class="writing-title"><a class="writing-title_link" href="{{ writing.get_absolute_url }}">{{ writing.title }}</a></li>
+                <li><a class="writing-title-link" href="{{ writing.get_absolute_url }}">{{ writing.title }}</a></li>
             {% endfor %}
         </ol>
         </li>

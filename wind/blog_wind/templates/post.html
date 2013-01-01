@@ -8,8 +8,8 @@
 
     <article class="article article--individual">
         <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
-        <h2 class="article-title"><a class="article-title_link" href="{% url post post.slug %}">{{ post.title }}</a></h2>
-        <div class={% if post.body_highlighted %}post-body-spacing{% endif %}>
+        <h2 class="article__title"><a class="article__title-link" href="{% url post post.slug %}">{{ post.title }}</a></h2>
+        <div class={% if post.body_highlighted %}l-post-body-spacing{% endif %}>
             {{ post.body_highlighted|safe }}
         </div>
         {% if post.gallery %}

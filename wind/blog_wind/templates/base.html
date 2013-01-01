@@ -25,48 +25,48 @@
   {% endif %}
  </head>
  <body>
-  <header class="clearfix" id="header">
-   <div class="container">
-    <a href="{% url home %}" id="header-title">
+  <header class="clearfix header l-header">
+   <div class="l-container">
+    <a href="{% url home %}" class="header__title l-header__title">
      Brian Holdefehr
     </a>
-    <nav id="nav">
-     <a class="nav_link" href="{% url about %}">
+    <nav class="nav l-nav">
+     <a class="nav__link" href="{% url about %}">
       About
      </a>
-     <a class="nav_link" href="{% url writing %}">
+     <a class="nav__link" href="{% url writing %}">
       Writing
      </a>
-     <a class="nav_link" href="{% url galleries %}">
+     <a class="nav__link" href="{% url galleries %}">
       Photos
      </a>
-     <a class="nav_link" href="mailto:bhold45@gmail.com">
+     <a class="nav__link" href="mailto:bhold45@gmail.com">
       Contact
      </a>
     </nav>
-    <ul id="social">
+    <ul class="social l-social">
      <li>
       <a href="https://twitter.com/BrianHoldefehr">
-       <span id="twitter-icon">
+       <span class="twitter-icon l-header-twitter-icon">
        </span>
       </a>
      </li>
      <li>
       <a href="https://github.com/BHold">
-       <span id="github-icon">
+       <span class="github-icon l-header-github-icon">
        </span>
       </a>
      </li>
      <li>
       <a href="{% url feed %}" type="application/rss+xml">
-       <span id="rss-icon">
+       <span class="rss-icon l-header-rss-icon">
        </span>
       </a>
      </li>
     </ul>
    </div>
   </header>
-  <div class="container" id="main" role="main">
+  <div class="l-container main l-main" role="main">
    {% block main %}{% endblock %}
   </div>
   <script type="text/javascript">

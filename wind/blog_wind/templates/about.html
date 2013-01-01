@@ -4,9 +4,9 @@
 
 {% block main %}
 {% load thumbnail %}
-    <article id="about-brian">
+    <article class="about">
         {% thumbnail "http://d3ry2ziyu0wa1k.cloudfront.net/images/brian-pic.jpg" "255x305" crop="center"  as im %}
-            <img id="brian-picture" alt="Brian at North Cascades NP" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></img>
+            <img class="about-picture l-about-picture" alt="Brian at North Cascades NP" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></img>
         {% endthumbnail %}
         <p>I'm a web developer and co-founder at <a class="article-link" href="https://www.gigsmash.com">Gigsmash</a>.</p>
         <p>I mostly use Python and JavaScript, and love working with both (though I'm always playing with new stuff).</p>
