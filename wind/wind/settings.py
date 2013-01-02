@@ -122,7 +122,6 @@ RESTART_PATH = "$HOME/webapps/django/apache2/bin/restart"
 RUN_TESTS = True
 TEST_APPS = ['blog_wind']
 APPS_TO_MIGRATE = ['blog_wind']
-USING_LESS = True
 
 # Grappelli settings
 GRAPPELLI_ADMIN_TITLE = "Brian Holdefehr"

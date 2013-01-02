@@ -41,7 +41,6 @@ AUTO_CREATE_BUCKET = getattr(settings, "AWS_AUTO_CREATE_BUCKET", False)
 SHOULD_GZIP = getattr(settings, "AWS_IS_GZIPPED", True)
 BUCKET_ACL = getattr(settings, "BUCKET_ACL", "public-read")
 DEFAULT_ACL = getattr(settings, "DEFAULT_ACL", "public-read")
-USING_LESS = getattr(settings, "USING_LESS", False)
 
 if SHOULD_GZIP:
     from gzip import GzipFile
@@ -221,7 +220,7 @@ def _update_static(exts):
             if ext == "css":
                 fname = _get_static_file(static_file["href"])
                 clear_temp = False
-                if fname.endswith(".less") and USING_LESS:
+                if fname.endswith(".less"):
                     clear_temp = True
                     fname = _convert_to_css(fname)
             else:
