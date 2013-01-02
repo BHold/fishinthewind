@@ -41,6 +41,7 @@ AUTO_CREATE_BUCKET = getattr(settings, "AWS_AUTO_CREATE_BUCKET", False)
 SHOULD_GZIP = getattr(settings, "AWS_IS_GZIPPED", True)
 BUCKET_ACL = getattr(settings, "BUCKET_ACL", "public-read")
 DEFAULT_ACL = getattr(settings, "DEFAULT_ACL", "public-read")
+USING_LESS = getattr(settings, "USING_LESS", False)
 
 if SHOULD_GZIP:
     from gzip import GzipFile
@@ -83,6 +84,25 @@ def check_remote_root(func):
 
         return func(*args, **kwargs)
     return wrapper
+
+
+def _convert_to_css(filename):
+    """
+    Converts a LESS file into a CSS file and stores it in temp directory
+
+    Returns path to new css file
+    """
+    root = LOCAL_PROJECT_ROOT
+    if not root.endswith("/"):
+        root += "/"
+    root += "temp/"
+    if not os.path.isdir(root):
+        # Create 'temp' dir if doesn't already exist
+        os.makedirs(root)
+    branch = filename.split("/")[-1].replace(".less", ".css")
+    new_filename = root + branch
+    local("lessc {0} > {1}".format(filename, new_filename))
+    return new_filename
 
 
 def _compress_content(content):
@@ -200,10 +220,17 @@ def _update_static(exts):
         for static_file in files_to_include:
             if ext == "css":
                 fname = _get_static_file(static_file["href"])
+                clear_temp = False
+                if fname.endswith(".less") and USING_LESS:
+                    clear_temp = True
+                    fname = _convert_to_css(fname)
             else:
                 fname = _get_static_file(static_file["src"])
             with open(fname, "r") as f:
                 combined += f.read()
+                if clear_temp:
+                    # If converted from LESS, should clean up temp CSS file
+                    os.remove(fname)
 
         hashed_name = "{0}/{1}.min.{0}".format(ext, md5(combined).hexdigest())
 
