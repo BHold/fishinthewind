@@ -1,6 +1,10 @@
 @media only screen and (max-device-width: 480px) {
     /* General */
 
+    body {
+        font-size: normal;
+    }
+
     .l-main {
         padding: 0 20px;
         margin: 0;
@@ -46,8 +50,8 @@
         padding: 0;
     }
 
-    .article-title {
-        margin: 30px 0 25px 0;
+    .article__title-link {
+        font-size: 170%;
     }
 
     .gallery {
@@ -61,14 +65,6 @@
 
     .vertical {
         height: 360px;
-    }
-
-    .article-list {
-        margin-left: 30px;
-    }
-
-    .def {
-        padding-left: 20px;
     }
 
     /* End Home and Posts */
@@ -97,7 +93,7 @@
     }
 
     .resume-name {
-        font-size: 40px;
+        font-size: 250%;
         line-height: 1;
     }
 
@@ -119,7 +115,12 @@
 
     .highlight {
         padding: 6px 8px;
-        font-size: 7px;
-        line-height: 10px;
+        font-size: 60%;
+    }
+}
+
+@media only screen and (max-device-width: 480px) and (orientation : portrait) {
+    .highlight {
+        font-size: 40%;
     }
 }
