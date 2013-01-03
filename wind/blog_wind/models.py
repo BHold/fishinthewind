@@ -22,7 +22,7 @@ body_help_text = """
                  Can use html tags. Should put paragraphs inside p tags: &lt;p&gt;(text here)&lt;p&gt;.
                  Links should have class 'article-link' for proper styling.
                  Section headers should be h3s with a class of 'section-header'.
-                 Lists should have a class of 'article-list'.
+                 Lists should have a class of 'l-article-list'.
 
                  Inline code (shell commands, paths, etc.) should be wrapped in &lt;code&gt; elements.
                  Code inside &lt;pre&gt; elements will be syntax hightlighted.
