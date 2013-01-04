@@ -1,4 +1,6 @@
 @media only screen and (max-device-width: 789px) {
+    /* For mobile devices too small to display full .container width */
+
     /* General */
 
     body {
@@ -36,6 +38,8 @@
 
     .l-nav {
         float: none;
+        padding-bottom: 3px;
+        top: 2px;
     }
 
     .social {
@@ -118,7 +122,9 @@
     }
 }
 
-@media only screen and (max-device-width: 480px) and (orientation : portrait) {
+@media only screen and (max-device-width: 568px) and (orientation : portrait) {
+    /* So more of each code line can fit on iPhone and smaller devices in
+       portrait mode */
     .highlight {
         font-size: 40%;
     }
