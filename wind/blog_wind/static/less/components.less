@@ -1,15 +1,17 @@
 /* Header */
 
 .header {
-    background: #333;
     padding: 7px 0;
     opacity: 0.93;
+    .linear-gradient(#333, #404040, #262626);
+    .box-shadow(0, 3px, 6px, 0.2);
 }
 
 .header__title {
     /* Fixed text-size to deal with vertical centering */
     color: #bbb;
     font: 24px/1.5 "bello-pro", Arial, sans-serif;
+    .transition(color, .1s);
     &:hover, &:focus {
         color: #999;
     }
@@ -21,6 +23,7 @@
     font-weight: 700;
     font-size: 17px;
     line-height: 20px;
+    .transition(color, .1s);
     &:hover, &:focus {
         color: #999;
     }
@@ -82,6 +85,7 @@
 .article__title-link {
     color: #333;
     font: 700 190%/1.25 "ff-nuvo-web-pro", Arial, sans-serif;
+    .transition(color, .1s);
     &:hover, &:focus {
         color: #111;
     }
@@ -96,6 +100,7 @@
 .article-link {
     color: #66f;
     font-weight: 700;
+    .transition(color, .1s);
     &:hover, &:focus {
         color: #44f;
     }
@@ -182,6 +187,7 @@ dfn {
     font-family: "museo-sans", Arial, sans-serif;
     font-weight: 700;
     color: #555;
+    .transition(color, .1s);
     &:hover, &:focus {
         color: #333;
     }

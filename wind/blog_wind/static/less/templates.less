@@ -43,3 +43,10 @@
     -webkit-box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
     box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
 }
+
+.transition (@prop, @duration, @timing: ease, @delay: 0) {
+    -webkit-transition: @prop @duration @timing @delay;
+    -moz-transition: @prop @duration @timing @delay;
+    -o-transition: @prop @duration @timing @delay;
+    transition: @prop @duration @timing @delay;
+}
