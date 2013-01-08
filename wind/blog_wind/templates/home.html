@@ -6,14 +6,14 @@
         <article class="article l-article">
             <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
             <h2 class="article__title l-article__title"><a class="article__title-link" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-            <div class={% if post.body_highlighted %}l-post-body-spacing{% endif %}>
+            <div{% if post.body_highlighted %} class="l-post-body-spacing"{% endif %}>
                 {{ post.body_highlighted|safe }}
             </div>
             {% if post.gallery %}
                 <div class="gallery">
                 {% for photo in post.gallery.photos.all %}
                     {% thumbnail photo.image "748" as im %}
-                    <img class="gallery-img{% if im.height > im.width %} vertical{% endif %}" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}"></img>
+                    <img class="gallery-img{% if im.height > im.width %} vertical{% endif %}" alt="{{ photo.title }}" src="{{ MEDIA_URL }}{{ im }}" width="{{ im.width }}" height="{{ im.height }}" />
                     {% endthumbnail %}
                 {% endfor %}
                 </div>
