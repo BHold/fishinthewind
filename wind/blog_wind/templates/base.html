@@ -16,6 +16,7 @@
   <script type="text/javascript">
    try{Typekit.load();}catch(e){}
   </script>
+  <link href="{{ STATIC_URL }}webfonts/ss-social.css" rel="stylesheet" />
   {% if debug %}
   <link class="minify-css" href="{{ STATIC_URL }}less/combined.less" rel="stylesheet/less" type="text/css"/>
   <script src="{{ STATIC_URL }}js/less-1.3.3.min.js" type="text/javascript">
@@ -46,19 +47,19 @@
     </nav>
     <ul class="social l-social">
      <li class="l-header-twitter-icon">
-      <a href="https://twitter.com/BrianHoldefehr">
+      <a href="https://twitter.com/BrianHoldefehr" title="My Twitter page">
        <span class="twitter-icon">
        </span>
       </a>
      </li>
      <li class="l-header-github-icon">
-      <a href="https://github.com/BHold">
+      <a href="https://github.com/BHold" title="My Github page">
        <span class="github-icon">
        </span>
       </a>
      </li>
      <li class="l-header-rss-icon">
-      <a href="{% url feed %}" type="application/rss+xml">
+      <a href="{% url feed %}" type="application/rss+xml" title="RSS Feed">
        <span class="rss-icon">
        </span>
       </a>
