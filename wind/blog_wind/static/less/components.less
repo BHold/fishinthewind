@@ -3,29 +3,29 @@
 .header {
     padding: 7px 0;
     opacity: 0.93;
-    .linear-gradient(#333, #404040, #262626);
+    .linear-gradient(mix(#333, @mix-color, 97%), mix(#404040, @mix-color, 97%), mix(#262626, @mix-color, 97%));
     .box-shadow(0, 3px, 6px, 0.2);
 }
 
 .header__title {
     /* Fixed text-size to deal with vertical centering */
-    color: #ccc;
+    color: mix(#ccc, @mix-color, 99%);
     font: 24px/1.5 "bello-pro", Arial, sans-serif;
     .transition(color, .1s);
     &:hover, &:focus {
-        color: #aaa;
+        color: mix(#aaa, @mix-color, 99%);
     }
 }
 
 .nav__link {
     /* Fixed text-size to deal with vertical centering */
-    color: #ccc;
+    color: mix(#ccc, @mix-color, 99%);
     font-weight: 700;
     font-size: 17px;
     line-height: 20px;
     .transition(color, .1s);
     &:hover, &:focus {
-        color: #aaa;
+        color: mix(#aaa, @mix-color, 99%);
     }
 }
 
@@ -34,10 +34,10 @@
 }
 
 .header-icon {
-    color: #ccc;
+    color: mix(#ccc, @mix-color, 99%);
     .transition(color, .1s);
     &:hover, &:focus {
-        color: #aaa;
+        color: mix(#aaa, @mix-color, 99%);
     }
 }
 
@@ -67,16 +67,16 @@
 }
 
 .article__title-link {
-    color: #333;
+    color: mix(#333, @mix-color, 96%);
     font: 700 190%/1.25 "ff-nuvo-web-pro", Arial, sans-serif;
     .transition(color, .1s);
     &:hover, &:focus {
-        color: #111;
+        color: mix(#111, @mix-color, 95%);
     }
 }
 
 .section-header {
-    color: #333;
+    color: mix(#333, @mix-color, 96%);
     font: 700 132%/1.25 "ff-nuvo-web-pro", Arial, sans-serif;
     margin: 1.48em 0;
 }
@@ -94,7 +94,7 @@
 }
 
 .date {
-    color: #999;
+    color: mix(#999, @mix-color, 98%);
     font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     font-weight: 700;
 }
@@ -131,10 +131,10 @@ dfn {
 .post-social-link {
     display: inline-block;
     text-align: center;
-    color: #888;
+    color: mix(#999, @mix-color, 98%);
     .transition(color, .2s);
     &:hover, &:focus {
-        color: #5b5b5b;
+        color: mix(#666, @mix-color, 97%);
     }
 }
 
@@ -145,17 +145,17 @@ dfn {
 .button {
     padding: 10px 15px;
     border: 3px solid #bbb;
-    color: #888;
+    color: mix(#888, @mix-color, 98%);
     font-weight: 700;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-    .linear-gradient(#f6f6f6, #fbfbfb, #eee);
+    .linear-gradient(mix(#f6f6f6, @mix-color, 99%), mix(#fbfbfb, @mix-color, 99%), mix(#eee, @mix-color, 99%));
     .rounded(7px);
     &:hover, &:focus {
         border: 3px solid #aaa;
-        color: #666;
+        color: mix(#666, @mix-color, 98%);
     }
     &:active {
-        background: #eee;
+        background: mix(#eee, @mix-color, 99%);
         padding: 11px 14px 9px 16px;
         .inner-shadow(2px, 2px, 3px, 0.2);
     }
@@ -178,7 +178,7 @@ dfn {
 .month {
     font-family: "ff-nuvo-web-pro", Arial, sans-serif;
     font-weight: 700;
-    color: #999;
+    color: mix(#999, @mix-color, 99%);
 }
 
 .gallery-title {
@@ -188,10 +188,10 @@ dfn {
 .writing-title-link, .gallery-title-link {
     font-family: "museo-sans", Arial, sans-serif;
     font-weight: 700;
-    color: #555;
+    color: mix(#555, @mix-color, 98%);
     .transition(color, .1s);
     &:hover, &:focus {
-        color: #333;
+        color: mix(#333, @mix-color, 97%);
     }
 }
 
@@ -207,7 +207,7 @@ dfn {
 }
 
 .gallery-preview:hover .gallery-title_link {
-    color: #111;
+    color: mix(#111, @mix-color, 95%);
 }
 
 /* End Archives */
@@ -243,7 +243,7 @@ dfn {
 }
 
 .resume-name {
-    color: #333;
+    color: mix(#333, @mix-color, 96%);
     font: 900 326%/.95 "ff-enzo-web", Arial, sans-serif;
 }
 
@@ -260,7 +260,7 @@ dfn {
 .resume-section-header {
     margin: 22px 0;
     font-size: 126%;
-    color: #444;
+    color: mix(#444, @mix-color, 96%);
 }
 
 /* End Resume */
@@ -286,7 +286,7 @@ dfn {
 
 code {
     display: inline-block;
-    color: #555;
+    color: mix(#555, @mix-color, 98%);
     border: 1px solid #DDD;
     padding: 0 3px;
     font: .85em/1.5 Menlo, Monaco, Courier, monospace;

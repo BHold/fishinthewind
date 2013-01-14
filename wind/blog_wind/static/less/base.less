@@ -1,3 +1,7 @@
+@mix-color: #f8a300;
+@base-font-color: mix(#444, @mix-color, 96%);
+
+
 * {
     .box-sizing(border-box);
     margin: 0;
@@ -6,7 +10,7 @@
 }
 
 body {
-    color: #444;
+    color: @base-font-color;
     font: 300 118.75%/1.5 "museo-sans", Arial, sans-serif;
 }
 
