@@ -6,11 +6,10 @@
 db/
 fish_venv/
 wind/blog_wind/migrations/
-wind/blog_wind/media/
+wind/media/
 wind/wind/local_settings.py
 wind/wind/live_settings.py
 wind/wind/static/
-wind/blog_wind/temp
 wind/posts/
 wind/temp/
-wind/blog_wind/static/webfonts/
+wind/static/webfonts/

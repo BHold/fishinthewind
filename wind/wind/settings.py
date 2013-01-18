@@ -18,7 +18,7 @@ USE_L10N = False
 
 USE_TZ = False
 
-MEDIA_ROOT = '%s/../blog_wind/media/' % PROJECT_ROOT
+MEDIA_ROOT = '%s/../media/' % PROJECT_ROOT
 
 MEDIA_URL = '/media/'
 
@@ -27,7 +27,7 @@ STATIC_ROOT = '%s/static/' % PROJECT_ROOT
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    "%s/../blog_wind/static" % PROJECT_ROOT,
+    "%s/../static" % PROJECT_ROOT,
 )
 
 STATICFILES_FINDERS = (
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'wind.urls'
 WSGI_APPLICATION = 'wind.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '%s/../blog_wind/templates' % PROJECT_ROOT,
+    '%s/../templates' % PROJECT_ROOT,
 )
 
 INSTALLED_APPS = (
