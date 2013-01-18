@@ -3,7 +3,7 @@ import os
 
 from django.core.files.storage import FileSystemStorage
 
-PROJECT_ROOT = os.path.abspath(__file__ + "/../../")
+PROJECT_ROOT = os.path.dirname(__file__) + "/../../"
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG

@@ -5,7 +5,7 @@ DEBUG = TEMPLATE_DEBUG = THUMBNAIL_DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_ROOT.parent.child('db', 'fish.sql'),
+        'NAME': '%s/../db/fish.sql' % PROJECT_ROOT,
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
