@@ -1,10 +1,9 @@
 import datetime
 import os
-from unipath import Path
 
 from django.core.files.storage import FileSystemStorage
 
-PROJECT_ROOT = Path(__file__).ancestor(3)
+PROJECT_ROOT = os.path.abspath(__file__ + "/../../")
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -21,16 +20,16 @@ USE_L10N = False
 
 USE_TZ = False
 
-MEDIA_ROOT = PROJECT_ROOT.child('media')
+MEDIA_ROOT = '%s/media/' % PROJECT_ROOT
 
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = PROJECT_ROOT.child('wind', 'static')
+STATIC_ROOT = '%s/wind/static' % PROJECT_ROOT
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    PROJECT_ROOT.child('static'),
+    '%s/static' % PROJECT_ROOT,
 )
 
 STATICFILES_FINDERS = (
@@ -60,7 +59,7 @@ ROOT_URLCONF = 'wind.urls'
 WSGI_APPLICATION = 'wind.wsgi.application'
 
 TEMPLATE_DIRS = (
-    PROJECT_ROOT.child('templates'),
+    '%s/templates' % PROJECT_ROOT,
 )
 
 INSTALLED_APPS = (
