@@ -7,7 +7,7 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "wind.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "wind.settings.local"
 
 from boto.exception import S3ResponseError
 from boto.s3.connection import S3Connection
@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 from cssmin import cssmin
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from fabric.api import local, run, env, cd, lcd, put, task
+from fabric.api import local, run, env, cd, lcd, task
 from fabric.contrib.console import confirm
 from hashlib import md5
 from slimit import minify
@@ -25,8 +25,6 @@ LOCAL_PROJECT_ROOT = getattr(settings, "LOCAL_PROJECT_ROOT", None)
 STATIC_DIRS = getattr(settings, "STATICFILES_DIRS", ())
 TEMPLATE_DIRS = getattr(settings, "TEMPLATE_DIRS", ())
 BASE_HTML_FILENAME = getattr(settings, "BASE_HTML_FILENAME", "")
-LIVE_SETTINGS = getattr(settings, "LIVE_SETTINGS", None)
-REMOTE_LIVE_SETTINGS = getattr(settings, "REMOTE_LIVE_SETTINGS", None)
 RUN_TESTS = getattr(settings, "RUN_TESTS", False)
 TEST_APPS = getattr(settings, "TEST_APPS", ())
 APPS_TO_MIGRATE = getattr(settings, "APPS_TO_MIGRATE", ())
@@ -309,18 +307,6 @@ def migrate_database():
         for app in APPS_TO_MIGRATE:
             run("./manage.py schemamigration {0} --auto".format(app))
             run("./manage.py migrate {0}".format(app))
-
-
-@task
-def transfer_settings():
-    """
-    Transfers live_settings.py to the server
-    """
-    if not LIVE_SETTINGS or not REMOTE_LIVE_SETTINGS \
-            or not os.path.isfile(LIVE_SETTINGS):
-        raise ImproperlyConfigured("Please make sure LIVE_SETTINGS and "
-            "REMOTE_LIVE_SETTINGS are set properly in your settings.py")
-    put(LIVE_SETTINGS, REMOTE_LIVE_SETTINGS)
 
 
 @task

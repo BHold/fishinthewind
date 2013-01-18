@@ -1,7 +1,10 @@
+import datetime
 import os
+from unipath import Path
+
 from django.core.files.storage import FileSystemStorage
 
-PROJECT_ROOT = os.path.dirname(__file__)
+PROJECT_ROOT = Path(__file__).ancestor(3)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -18,16 +21,16 @@ USE_L10N = False
 
 USE_TZ = False
 
-MEDIA_ROOT = '%s/../media/' % PROJECT_ROOT
+MEDIA_ROOT = PROJECT_ROOT.child('media')
 
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = '%s/static/' % PROJECT_ROOT
+STATIC_ROOT = PROJECT_ROOT.child('wind', 'static')
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    "%s/../static" % PROJECT_ROOT,
+    PROJECT_ROOT.child('static'),
 )
 
 STATICFILES_FINDERS = (
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'wind.urls'
 WSGI_APPLICATION = 'wind.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '%s/../templates' % PROJECT_ROOT,
+    PROJECT_ROOT.child('templates'),
 )
 
 INSTALLED_APPS = (
@@ -74,7 +77,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'grappelli',
 
-    'django.contrib.admin', # Grappelli needs to be installed before admin
+    'django.contrib.admin',  # Grappelli needs to be installed before admin
 
     'blog_wind'
 )
@@ -105,17 +108,15 @@ LOGGING = {
 
 # Used to store gallery .zipfiles locally, instead of at MEDIA_ROOT since there
 # is no need to send them to S3
-LOCAL_FILE_STORAGE = FileSystemStorage(location='%s/../blog_wind/' % PROJECT_ROOT)
+LOCAL_FILE_STORAGE = FileSystemStorage(location=PROJECT_ROOT)
 
 # So can use debug context processor
 INTERNAL_IPS = ('127.0.0.1',)
 
 # Settings used by fabfile
-LOCAL_PROJECT_ROOT = PROJECT_ROOT + "/../"
-REMOTE_PROJECT_ROOT = "/home/bhold/webapps/django/fishinthewind/wind/"
+LOCAL_PROJECT_ROOT = PROJECT_ROOT
+REMOTE_PROJECT_ROOT = "$HOME/webapps/django/fishinthewind/wind/"
 BASE_HTML_FILENAME = "base.html"
-LIVE_SETTINGS = PROJECT_ROOT + "/live_settings.py"
-REMOTE_LIVE_SETTINGS = REMOTE_PROJECT_ROOT + "wind/live_settings.py"
 REMOTE_HOST_DOMAIN = "bhold.webfactional.com"
 REMOTE_HOST_USER = "bhold"
 RESTART_PATH = "$HOME/webapps/django/apache2/bin/restart"
@@ -126,11 +127,24 @@ APPS_TO_MIGRATE = ['blog_wind']
 # Grappelli settings
 GRAPPELLI_ADMIN_TITLE = "Brian Holdefehr"
 
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = (60 * 60)
+CACHE_MIDDLEWARE_PREFIX = ''
 
-try:
-    from local_settings import *
-except ImportError:
-    try:
-        from live_settings import *
-    except ImportError:
-        pass
+SECRET_KEY = os.environ['FISH_SECRET_KEY']
+
+AWS_ACCESS_KEY_ID = 'AKIAIL6DJPWZAVLJAAHQ'
+AWS_SECRET_ACCESS_KEY = os.environ['FISH_AWS_SECRET_KEY']
+AWS_STORAGE_BUCKET_NAME = 'fishinthewind'
+AWS_AUTO_CREATE_BUCKET = True
+AWS_IS_GZIPPED = True
+
+future = datetime.datetime.now() + datetime.timedelta(days=364)
+AWS_HEADERS = {
+    'Expires': future.strftime('%a, %d %b %Y %H:%M:%S GMT'),
+    'Cache-Control': 'max-age=31536000, public'
+}
+
+# Uploaded media, and static files via collectstatic both use this backend to
+# send files to s3
+DEFAULT_FILE_STORAGE = STATICFILES_STORAGE = 'wind.storage.StaticToS3Storage'
