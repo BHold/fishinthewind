@@ -5,7 +5,7 @@
     {% for post in posts %}
         <article class="article l-article">
             <p class="date">{{ post.publish_at|date:"F j, Y" }}</p>
-            <h2 class="article__title l-article__title"><a class="article__title-link" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <h2 class="article__title l-article__title"><a class="article__title-link" href="{{ post.get_absolute_url }}">{{ post.title|safe }}</a></h2>
             <div{% if post.body_highlighted %} class="l-post-body-spacing"{% endif %}>
                 {{ post.body_highlighted|safe }}
             </div>
