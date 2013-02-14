@@ -9,9 +9,9 @@
     <ol class="month-list">
     {% for month in writings_by_month %}
         <li class="month">{{ month.grouper }}
-        <ol class="writing-list">
+        <ol class="writing-list l-writing-list">
             {% for writing in month.list %}
-                <li><a class="writing-title-link" href="{{ writing.get_absolute_url }}">{{ writing.title }}</a></li>
+                <li><a class="writing-title-link" href="{{ writing.get_absolute_url }}">{{ writing.title|safe }}</a></li>
             {% endfor %}
         </ol>
         </li>
