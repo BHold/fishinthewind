@@ -8,9 +8,10 @@
         {% thumbnail "http://d3ry2ziyu0wa1k.cloudfront.net/images/brian-pic.jpg" "255x305" crop="center"  as im %}
             <img class="about-picture l-about-picture" alt="Brian at North Cascades NP" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
         {% endthumbnail %}
-        <p>I'm a web developer and beginning blogger.</p>
-        <p>I mostly use Python and JavaScript, and love working with both (though I'm always playing with new stuff).</p>
-        <p>My little startup attempt, <a class="article-link" href="https://www.gigsmash.com">Gigsmash</a>, didn't gain much traction, so I'm currently looking for a job in the New York area. If you'd like to talk, <a class="article-link" href="mailto:bhold45@gmail.com">get in touch</a>!</p>
-        <p>Some non-programming stuff I like: travel, nature, climbing, reading, hiking, photography, art.</p>
+        <div class="l-about-text">
+            <p>I'm a developer at <a href="http://keep.com">Keep</a> and beginning blogger.</p>
+            <p>I mostly code in Python and JavaScript, and love working with both (though I'm always playing with new stuff).</p>
+            <p>Some non-programming stuff I like: travel, nature, climbing, reading, hiking, photography, art.</p>
+        </div>
     </article>
 {% endblock %}
