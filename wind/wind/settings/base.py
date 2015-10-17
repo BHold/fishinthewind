@@ -74,7 +74,7 @@ INSTALLED_APPS = (
     'south',
     'storages',
     'sorl.thumbnail',
-    # 'grappelli',
+    'grappelli',
 
     'django.contrib.admin',  # Grappelli needs to be installed before admin
 
