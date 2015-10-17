@@ -212,7 +212,7 @@ def _update_static(exts):
         if not files_to_include:
             raise ImproperlyConfigured("In order to concatenate and minify {0}"
                 " files, you need to set a class of 'minify-{1} on the "
-                "links/scripts you want to include".format(ext.uppers(), ext))
+                "links/scripts you want to include".format(ext.upper(), ext))
 
         combined = ""
         # Concatenate selected files into 'combined'
