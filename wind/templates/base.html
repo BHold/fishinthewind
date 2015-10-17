@@ -41,9 +41,11 @@
      <a class="nav__link l-nav__link" href="{% url writing %}">
       Writing
      </a>
-     <a class="nav__link l-nav__link" href="{% url galleries %}">
-      Photos
-     </a>
+     {% if SHOW_PHOTOS %}
+      <a class="nav__link l-nav__link" href="{% url galleries %}">
+        Photos
+      </a>
+     {% endif %}
      <a class="nav__link l-nav__link" href="mailto:bhold45@gmail.com">
       Contact
      </a>

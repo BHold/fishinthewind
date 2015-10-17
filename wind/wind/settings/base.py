@@ -149,3 +149,6 @@ AWS_HEADERS = {
 # Uploaded media, and static files via collectstatic both use this backend to
 # send files to s3
 DEFAULT_FILE_STORAGE = STATICFILES_STORAGE = 'wind.storage.StaticToS3Storage'
+
+# Toggles showing photos header link
+SHOW_PHOTOS = False
