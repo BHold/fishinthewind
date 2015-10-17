@@ -152,3 +152,6 @@ DEFAULT_FILE_STORAGE = STATICFILES_STORAGE = 'wind.storage.StaticToS3Storage'
 
 # Toggles showing photos header link
 SHOW_PHOTOS = False
+
+# Toggles showing github links
+SHOW_GITHUB = False

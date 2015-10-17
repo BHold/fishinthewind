@@ -46,23 +46,28 @@
       Photos
      </a>
      {% endif %}
-     <a class="nav__link l-nav__link" href="mailto:bhold45@gmail.com">
-      Contact
-     </a>
     </nav>
     <ul class="social l-social">
      <li class="l-header-twitter-icon">
       <a class="ss-twitter header-twitter-icon header-icon" href="https://twitter.com/BrianHoldefehr">
       </a>
      </li>
+     {% if SHOW_GITHUB %}
      <li class="l-header-github-icon">
       <a class="ss-octocat header-github-icon header-icon" href="https://github.com/BHold">
       </a>
+     {% endif %}
      </li>
      <li class="l-header-rss-icon">
       <a class="ss-rss header-rss-icon header-icon" href="{% url feed %}" type="application/rss+xml">
       </a>
      </li>
+     {% if not SHOW_GITHUB %}
+     <li class="l-header-email-icon">
+     <a class="ss-mail header-mail-icon header-icon" href="mailto:bhold45@gmail.com">
+      </a>
+     </li>
+     {% endif %}
     </ul>
    </div>
   </header>
