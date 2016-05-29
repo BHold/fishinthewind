@@ -73,13 +73,13 @@
     }
 }
 
-.section-header {
+.article-body h3 {
     color: mix(#333, @mix-color, 86%);
     font: 600 125%/1.25 "adelle-sans", Arial, sans-serif;
     margin: 1.4em 0;
 }
 
-.article-link {
+.article-body a {
     color: #66f;
     font-weight: 700;
     .transition(color, .1s);
@@ -141,21 +141,14 @@ dfn {
 /* Buttons */
 
 .button {
-    padding: 10px 15px;
-    border: 3px solid #bbb;
+    font-family: "adelle-sans", Arial, sans-serif;
+    font-weight: 600;
     color: mix(#888, @mix-color, 95%);
-    font-weight: 700;
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-    .linear-gradient(mix(#f6f6f6, @mix-color, 97%), mix(#fbfbfb, @mix-color, 97%), mix(#eee, @mix-color, 97%));
-    .rounded(7px);
     &:hover, &:focus {
-        border: 3px solid #aaa;
         color: mix(#666, @mix-color, 90%);
     }
     &:active {
         background: mix(#eee, @mix-color, 98%);
-        padding: 11px 14px 9px 16px;
-        .inner-shadow(2px, 2px, 3px, 0.2);
     }
 }
 
